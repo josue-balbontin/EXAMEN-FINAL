@@ -93,6 +93,7 @@ el mes.
 * 1--1-1 — fecha en formato correcto, pero con un mes incorrecto -1
 * 1---1-1 — fecha en formato incorrecto: el mes no puede comenzar con dos guiones
 * 1-+1-+1 — fecha correcta, ya que +1 es un número entero
+
 Después de manejar cualquiera de los errores de entrada descritos y mostrar el mensaje, el
 programa debe terminar su ejecución.
 #### Qué errores de entrada no manejar
@@ -154,8 +155,10 @@ Al implementar este patrón, es posible que necesites utilizar la búsqueda con 
 un diccionario pasado a la función por referencia constante. Como se mostró anteriormente,
 esto no será posible, ya que el acceso a una clave inexistente con corchetes la agregará al
 diccionario, lo cual no es permisible para un diccionario constante.
+
 En este caso, en lugar de corchetes, utiliza el método at: en caso de ausencia de la clave,
 lanzará una excepción y, por lo tanto, puede ser utilizado para un objeto constante.
+
 Por ejemplo, en lugar del código
 > void DoSomething(const map<int, int>& m) {
 
