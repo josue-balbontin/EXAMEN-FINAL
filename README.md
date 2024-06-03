@@ -21,6 +21,7 @@ Nuestra BD debe entender ciertos comandos para que se pueda interactuar con ella
 - eliminar todos los eventos de una fecha específica: Del Fecha
 - buscar eventos en una fecha específica: Find Fecha
 - imprimir todos los eventos de todas las fechas: Print
+
 Todos los comandos, fechas y eventos en la entrada están separados por espacios. Los
 comandos se leen desde la entrada estándar. En una línea puede haber exactamente un
 comando, pero se pueden ingresar varios comandos en varias líneas. También pueden haber
@@ -101,24 +102,24 @@ varios eventos")
 * Aunque una fecha con un valor de año negativo se considera correcta, las pruebas están
 diseñadas de tal manera que no necesitarás imprimirla en el comando Print.
 #### Ejemplos
-> Entrada correcta:
-Add 0-1-2 event1
-Add 1-2-3 event2
-Find 0-1-2
-Del 0-1-2
+Entrada correcta:
+> Add 0-1-2 event1
+> Add 1-2-3 event2
+> Find 0-1-2
+> Del 0-1-2
 Print
-Del 1-2-3 event2
-Del 1-2-3 event2
-> Salida:
-event1
-Deleted 1 events
-0001-02-03 event2
-Deleted successfully
-Event not found
-> Entrada Incorrecta:
-Add 0-13-32 event1
-> Salida: 
-Month value is invalid: 13
+> Del 1-2-3 event2
+> Del 1-2-3 event2
+Salida:
+> event1
+> Deleted 1 events
+> 0001-02-03 event2
+> Deleted successfully
+> Event not found
+Entrada Incorrecta:
+> Add 0-13-32 event1
+Salida: 
+> Month value is invalid: 13
 ### Observaciones
 Conversión de un número a una cadena Para, teniendo el número MONTH, formar la cadena
 «El valor del mes no es válido: MONTH», se puede utilizar la función to_string, que convierte
@@ -134,17 +135,17 @@ En este caso, en lugar de corchetes, utiliza el método at: en caso de ausencia 
 lanzará una excepción y, por lo tanto, puede ser utilizado para un objeto constante.
 Por ejemplo, en lugar del código
 > void DoSomething(const map<int, int>& m) {
-//.
-if (m.count(key) > 0) {
-value = m[key]; / No compilara
-}
-//...
-}
+> //.
+> if (m.count(key) > 0) {
+> value = m[key]; / No compilara
+> }
+> //...
+> }
 Use este codigo:
->void DoSomething(const map<int, int>& m) {
-    //...
-    if (m.count(key) > 0) {
-value = m.at(key); / Todo bien
-}
- //...
- }
+> void DoSomething(const map<int, int>& m) {
+>     //...
+>    if (m.count(key) > 0) {
+> value = m.at(key); / Todo bien
+> }
+> //...
+> }
