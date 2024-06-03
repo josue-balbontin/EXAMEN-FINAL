@@ -193,6 +193,8 @@ Use este codigo:
 ## FUNCIONES Y ESTRUCTURAS
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO 
 ## CREDITOS
-    Creditos los autores y a los contribuyentes Josue Balbontin y Alejandro Ramirez 
+Creditos los autores y a los contribuyentes: 
+* Josue Balbontin 
+* Alejandro Ramirez 
 
-    Creado en c++ con el compilador MinGW y el IDE Visual Studio Code
+Creado en c++ con el compilador MinGW y el IDE Visual Studio Code
