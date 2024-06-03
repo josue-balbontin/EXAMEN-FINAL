@@ -188,3 +188,11 @@ Use este codigo:
 > //...
 
 > }
+## BASE DE DATOS 
+## ESTRUCTURA DE REPOSITORIO
+## FUNCIONES Y ESTRUCTURAS
+## DIAGRAMA DE FLUJO O PSEUDOCODIGO 
+## CREDITOS
+    Creditos los autores y a los contribuyentes Josue Balbontin y Alejandro Ramirez 
+
+    Creado en c++ con el compilador MinGW y el IDE Visual Studio Code
