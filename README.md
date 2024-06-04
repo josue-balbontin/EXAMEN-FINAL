@@ -193,7 +193,7 @@ Use este codigo:
 ## FUNCIONES Y ESTRUCTURAS
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO 
 ## CREDITOS
-Creditos los autores y a los contribuyentes: 
+Creditos a los autores: 
 * Josue Balbontin 
 * Alejandro Ramirez 
 
