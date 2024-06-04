@@ -55,7 +55,6 @@ void database_in(vector<input> &data_hub){
     }
 }
 
-
 void check_data (vector<input> &data_hub){ //funcion para verificar si los datos son correctos
     while (true){
         input data;
@@ -93,4 +92,25 @@ void database_out(const vector<input> &data){
     database<<data[i].year<<"y"<<data[i].month<<"m"<<data[i].day<<"d"<<data[i].event<<endl;
     }
 
+}
+
+void delete_identical_events (vector<input> &data_hub){ //elimina un evento si hay otro evento identico
+    for (int i = 0; i<data_hub.size(); ++i){ //se recorre todos los elementos de data_hub
+            for (int j = i+1; j<data_hub.size();){ //j iniciara en un elemento despues de i
+                if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
+                    && data_hub[j].event == data_hub[i].event) {
+                    //si se encuentra un elemento con exactamente los mismos valores se elimina la copia
+                    data_hub.erase(data_hub.begin() + j);    
+                }
+                else{
+                    ++j; //Si no encuentra una copia ahi recien se incrementa j
+                    //Ejemplo para que se entienda la logica: 
+                    //Obviemos la fecha y digamos que hay un evento a, evento b, copia evento a, evento c, evento d
+                    //i iniciara en evento a y j iniciara en evento b, se compara si evento a y evento b son iguales, como no lo son, j se incrementa
+                    //i sigue en evento a y j ahora esta en copia evento a, como son iguales se elimina copia evento a, y al eliminarse quedaria asi:
+                    //evento a, evento b, evento c, evento d, como habras notado j no cambia porque al eliminarse copia evento a, el evento c se fue para atras y ocupo su numero de indice            }
+                    //si hubiera puesto que j se incrementaba en el for se saltaria al evento d y nunca hubieramos podido comparar el evento c
+                }
+            }
+    }
 }
