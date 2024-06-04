@@ -4,6 +4,7 @@
 
 int main() {
     vector<input> data_hub; //creo un vector de estructuras que guardara los datos
+    database_in(data_hub);
     check_data (data_hub);
     return 0;
 }
