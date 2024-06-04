@@ -8,7 +8,10 @@ void database_in(vector<input> &data_hub){
       ifstream database; // Se crea un tipo de dato para trabajar con los archivos
      database.open("database.txt",ios::in); // Se abre el archivo 
     if(database.fail()){ // En caso de que no se pueda abrir el archivo
-        cout<<"no se pudo abrir el archivo";
+        cout<<"No se encontro el archivo se va a proceder a crear uno nuevo...";
+        database.open("database.txt",ios::app);
+        cout<<endl;
+        return ;
     }
     while(!database.eof()){ //mientras no se termine el documento no para
       getline(database,texto); // obtiene linea por linea del documento
@@ -80,6 +83,7 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
 }
 
 void database_out(const vector<input> &data){
+    remove("database.txt");
     ofstream database; // Se crea un tipo de dato para trabajar con los archivos
      database.open("database.txt",ios::app); // Se abre el archivo y si no existe se crea
     if(database.fail()){ // En caso de que no se pueda crear el archivo
