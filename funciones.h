@@ -1,6 +1,4 @@
-#ifndef funciones_H
-#define funciones_H
-
+#pragma once
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -9,5 +7,3 @@
 #include <string>
 using namespace std;
 
-
-#endif 
