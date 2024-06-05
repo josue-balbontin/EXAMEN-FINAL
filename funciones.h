@@ -18,3 +18,4 @@ void database_out(const vector<input> &data);
 void database_in(vector<input> &data_hub);
 void delete_identical_events (vector<input> &data_hub);
 void ascending_order (vector<input> &data_hub);
+void ascending_order_event (vector<input> &data_hub);

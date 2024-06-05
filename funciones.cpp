@@ -135,3 +135,45 @@ void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma 
     data_hub = data_hub_orderly; //data_hub toma los valores de data_hub_orderly
 }
 
+void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los eventos de forma desendiente osea a,b,c,d....
+string word;
+bool menor=false;
+ vector<string> evento; //vector para guardar todos los eventos y compararlos
+for(int i=0 ;i<data_hub.size();i++){    //inicia un bucle para que se ejecute para todos las structuras que hayan
+ for(int j=0;j<data_hub[i].event.size();j++) { // separa las palabras y lo pone en el vector
+    if(data_hub[i].event[j]==' '){
+        evento.push_back(word);
+        word="";
+    }
+    else{
+         word=word+data_hub[i].event[j];
+    }
+ }
+ evento.push_back(word);
+ word="";
+ while(evento.size()>1){    //mientras el vector no sea menor a 1 de tamaño no par "se estan quitando valores al vector"
+    for(int k=0;k<evento.size();k++){
+        for(int l=0;l<evento.size();l++){
+        if(evento[k]<=evento[l] && l!=k){
+            menor=true;
+        }
+        else if (l!=k){
+            menor=false;
+        break;
+        }
+        }
+        if(menor==true){
+            word=word+evento[k]+" ";
+            evento.erase(evento.begin()+k);
+            menor=false;
+            break;
+        }
+    }
+}//se completan algunos pasos y se  deja limpio para la sgt interaccion
+word=word+evento[0];
+data_hub[i].event=word;
+evento={""};
+evento.clear();
+word="";
+ }
+}
