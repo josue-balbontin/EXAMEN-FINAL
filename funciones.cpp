@@ -134,20 +134,3 @@ void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma 
     }
     data_hub = data_hub_orderly; //data_hub toma los valores de data_hub_orderly
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
