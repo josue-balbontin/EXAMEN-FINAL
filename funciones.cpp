@@ -115,7 +115,8 @@ void delete_identical_events (vector<input> &data_hub){ //elimina un evento si h
     }
 }
 
-void ascending_order (vector<input> &data_hub){
+void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma ascendente
+
     vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
     vector<input> data_hub_orderly (data_hub.size()); //creo un vector vacio con "data_hub.size" valores donde agregare los datos ordenados
     while(data_hub_copy.size()>0){ //si la copia de data_hub se queda sin elementos se termina el bucle
@@ -132,4 +133,48 @@ void ascending_order (vector<input> &data_hub){
             data_hub_copy.erase(data_hub_copy.begin() + index); //se elimina esa fecha de data_hub_copy para que ya no la tome en cuenta
     }
     data_hub = data_hub_orderly; //data_hub toma los valores de data_hub_orderly
+}
+
+
+void ascending_order_event (vector<input> &data_hub){
+string word;
+bool menor=false;
+ vector<string> evento;
+for(int i=0 ;i<data_hub.size();i++){
+ for(int j=0;j<data_hub[i].event.size();j++) {
+    if(data_hub[i].event[j]==' '){
+        evento.push_back(word);
+        word="";
+    }
+    else{
+         word=word+data_hub[i].event[j];
+    }
+ }
+ evento.push_back(word);
+ word="";
+ while(evento.size()>1){
+    for(int k=0;k<evento.size();k++){
+        for(int l=0;l<evento.size();l++){
+        if(evento[k]<=evento[l] && l!=k){
+            menor=true;
+        }
+        else if (l!=k){
+            menor=false;
+        break;
+        }
+        }
+        if(menor==true){
+            word=word+evento[k]+" ";
+            evento.erase(evento.begin()+k);
+            menor=false;
+            break;
+        }
+    }
+}
+word=word+evento[0];
+data_hub[i].event=word;
+evento={""};
+evento.clear();
+word="";
+ }
 }
