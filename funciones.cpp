@@ -1,6 +1,6 @@
 #include "funciones.h"
 
-void database_in(vector<input> &data_hub){
+void database_in(vector<input> &data_hub){//funcion para exportar los datos del txt al programa.
     bool confiry=false,confirm=false,confird=false; //variables para confirmar si ya paso un suceso
     string word; // variable donde se guarda las palabras de doc 
     input data; // structura
@@ -81,7 +81,7 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
     }
 }
 
-void database_out(const vector<input> &data){
+void database_out(const vector<input> &data){//funcion para agregar datos al txt
     remove("database.txt");
     ofstream database; // Se crea un tipo de dato para trabajar con los archivos
      database.open("database.txt",ios::app); // Se abre el archivo y si no existe se crea
