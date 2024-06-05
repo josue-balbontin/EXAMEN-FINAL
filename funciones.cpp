@@ -117,7 +117,7 @@ void delete_identical_events (vector<input> &data_hub){ //elimina un evento si h
 
 void ascending_order (vector<input> &data_hub){
     vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
-    vector<input> data_hub_orderly; //creo un vector vacio con "data_hub.size" valores donde agregare los datos ordenados
+    vector<input> data_hub_orderly; //creo un vector vacio donde agregare los datos ordenados
     while(data_hub_copy.size()>0){ //si la copia de data_hub se queda sin elementos se termina el bucle
             //de manera arbitraria pongo como minimo momentaneamente el primer valor de cada dato y por lo tanto el indice seria 0
             int index = 0;
