@@ -136,3 +136,18 @@ void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma 
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
