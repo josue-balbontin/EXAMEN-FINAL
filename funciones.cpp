@@ -5,8 +5,8 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
     string word; // variable donde se guarda las palabras de doc 
     input data; // structura
     string texto; // texto que se recibe del documento
-      ifstream database; // Se crea un tipo de dato para trabajar con los archivos
-     database.open("database.txt",ios::in); // Se abre el archivo 
+    ifstream database; // Se crea un tipo de dato para trabajar con los archivos
+    database.open("database.txt",ios::in); // Se abre el archivo 
     if(database.fail()){ // En caso de que no se pueda abrir el archivo
         cout<<"No se encontro el archivo se va a proceder a crear uno nuevo...";
         database.open("database.txt",ios::app);
@@ -77,7 +77,7 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
         //NOTA: Hay que preguntar al Ingeniero que mensaje enviar cuando se colocan varios guiones
         data_hub.push_back(data); //Como todos los datos son correctos, ingreso los datos al vector de estructuras
         database_out(data_hub);
-
+        break;
     }
 }
 
@@ -118,7 +118,7 @@ void delete_identical_events (vector<input> &data_hub){ //elimina un evento si h
 void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma ascendente
 
     vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
-    vector<input> data_hub_orderly (data_hub.size()); //creo un vector vacio con "data_hub.size" valores donde agregare los datos ordenados
+    vector<input> data_hub_orderly; //creo un vector vacio donde agregare los datos ordenados
     while(data_hub_copy.size()>0){ //si la copia de data_hub se queda sin elementos se termina el bucle
             //de manera arbitraria pongo como minimo momentaneamente el primer valor de cada dato y por lo tanto el indice seria 0
             int index = 0;
@@ -134,3 +134,4 @@ void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma 
     }
     data_hub = data_hub_orderly; //data_hub toma los valores de data_hub_orderly
 }
+
