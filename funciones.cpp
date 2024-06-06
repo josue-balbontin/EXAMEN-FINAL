@@ -114,8 +114,13 @@ void delete_identical_events (vector<input> &data_hub){ //elimina un evento si h
     for (int i = 0; i<data_hub.size(); ++i){ //se recorre todos los elementos de data_hub
             for (int j = i+1; j<data_hub.size();){ //j iniciara en un elemento despues de i
                 if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
-                    && data_hub[j].event == data_hub[i].event) {
+                    && data_hub[j].event == data_hub[i].event){
                     //si se encuentra un elemento con exactamente los mismos valores se elimina la copia
+                    data_hub.erase(data_hub.begin() + j);    
+                }
+                else if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
+                    && data_hub[j].event != data_hub[i].event){ //si se encuentra un elemento con la misma fecha pero con diferente evento se suma al evento que se ingreso primero el evento que se ingreso despues
+                    data_hub[i].event = data_hub[i].event + " " + data_hub[j].event;
                     data_hub.erase(data_hub.begin() + j);    
                 }
                 else{
