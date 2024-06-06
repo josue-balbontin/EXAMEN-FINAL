@@ -43,8 +43,8 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
                 word="";
                 continue;
             }
-           if(confird==true && confiry==true && confirm==true){ //si paso por todo lo anterior significa que lo sgt es el event
-            word=word+texto[i];
+            if(confird==true && confiry==true && confirm==true){ //si paso por todo lo anterior significa que lo sgt es el event
+                word=word+texto[i];
            }
         }
         //guarda la ultima palabra "event"  limpia word y limpia los bool y hace pushback para continuar con la otra linea
@@ -57,14 +57,31 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
 
 void check_data (vector<input> &data_hub){ //funcion para verificar si los datos son correctos
     while (true){
-        input data;
-        cin>>data.year;
-        cin.ignore(); //ignora el siguiente caracter ya que el siguiente caracter es un guion
-        cin>>data.month;
-        cin.ignore();
-        cin>>data.day;
-        cin.ignore(); //ignora el siguiente caracter ya que el siguiente caracter es un espacio
-        cin>>data.event;
+        input data; //le doy nombre a mi estructura
+        string user_input, copy_user_input, event_input, copy_event_input, date_string;
+        char ignore, ignore_again;
+        getline(cin, user_input); //Se guarda la línea completa después de add como una string llamada user_input
+        copy_user_input = user_input; //copio la string que ingreso el usuario
+        stringstream copy_data_memory (copy_user_input); //creo un area de memoria temporal para extraer solo la fecha independientemente si esta bien o mal
+        copy_data_memory>>date_string; //extraigo solamente la primera string que seria la fecha
+        
+        stringstream data_memory (user_input); //Se crea una área de memoria temporal (como un almacen) que utilizaremos para almacenar los datos antes de usarlos. A diferencia de un string, un stringstream lo podemos usar para extraer los datos almacenados como numeros o chars
+        
+        if (!(data_memory>>data.year>>ignore>>data.month>>ignore_again>>data.day) || ignore != '-' || ignore_again != '-') {
+            //verifico que el formato de la fecha sea correcto
+            cout<<"Wrong date format: "<<date_string<<endl; //debido a que el formato es incorrecto le mando la string que extraje anteriormente
+            break;
+        }
+        
+        getline(data_memory, event_input); //si hay un evento tambien lo extraigo como una sola linea
+        for (int i = 0; i<event_input.size(); ++i){ //creo un bucle para eliminar los espacios
+            if (event_input[i]!=' '){
+                copy_event_input = copy_event_input + event_input[i];                  
+            }
+        }
+        
+        data.event = copy_event_input; //se copia el evento sin espacios en data.event
+
         if (data.month<1 || data.month>12){
             cout<<"Month value is invalid: "<<data.month<<endl; //como el dato esta fuera del rango se envia una alerta
             break; //se termina el bucle
@@ -73,8 +90,7 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
             cout<<"Day value is invalid: "<<data.day<<endl; 
             break;          
         }
-        //NOTA: No tomo el caso de doble guion ¿Porque? Porque si el usuario ingresa tres o mas guiones el programa tomara el dato como 0 y al estar 0 fuera del rango la condicional enviara una alerta
-        //NOTA: Hay que preguntar al Ingeniero que mensaje enviar cuando se colocan varios guiones
+        
         data_hub.push_back(data); //Como todos los datos son correctos, ingreso los datos al vector de estructuras
         database_out(data_hub);
         break;
@@ -84,12 +100,12 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
 void database_out(const vector<input> &data){//funcion para agregar datos al txt
     remove("database.txt");
     ofstream database; // Se crea un tipo de dato para trabajar con los archivos
-     database.open("database.txt",ios::app); // Se abre el archivo y si no existe se crea
-    if(database.fail()){ // En caso de que no se pueda crear el archivo
+    database.open("database.txt",ios::app); // Se abre el archivo y si no existe se crea
+    if (database.fail()){ // En caso de que no se pueda crear el archivo
         cout<<"no se pudo abrir el archivo";
     }
-    for(int i =0;i<data.size();i++){    //se agregan los datos al archivo
-    database<<data[i].year<<"y"<<data[i].month<<"m"<<data[i].day<<"d"<<data[i].event<<endl;
+    for (int i =0;i<data.size();i++){ //se agregan los datos al archivo
+        database<<data[i].year<<"y"<<data[i].month<<"m"<<data[i].day<<"d"<<data[i].event<<endl;
     }
 
 }
@@ -116,7 +132,6 @@ void delete_identical_events (vector<input> &data_hub){ //elimina un evento si h
 }
 
 void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma ascendente
-
     vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
     vector<input> data_hub_orderly; //creo un vector vacio donde agregare los datos ordenados
     while(data_hub_copy.size()>0){ //si la copia de data_hub se queda sin elementos se termina el bucle
@@ -136,44 +151,44 @@ void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma 
 }
 
 void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los eventos de forma desendiente osea a,b,c,d....
-string word;
-bool menor=false;
- vector<string> evento; //vector para guardar todos los eventos y compararlos
-for(int i=0 ;i<data_hub.size();i++){    //inicia un bucle para que se ejecute para todos las structuras que hayan
- for(int j=0;j<data_hub[i].event.size();j++) { // separa las palabras y lo pone en el vector
-    if(data_hub[i].event[j]==' '){
+    string word;
+    bool menor=false;
+    vector<string> evento; //vector para guardar todos los eventos y compararlos
+    for(int i=0 ;i<data_hub.size();i++){ //inicia un bucle para que se ejecute para todos las structuras que hayan
+        for(int j=0;j<data_hub[i].event.size();j++){ // separa las palabras y lo pone en el vector
+            if(data_hub[i].event[j]==' '){
+                evento.push_back(word);
+                word="";
+            }
+            else{
+                word=word+data_hub[i].event[j];
+            }
+        }
         evento.push_back(word);
         word="";
+        while(evento.size()>1){ //mientras el vector no sea menor a 1 de tamaño no par "se estan quitando valores al vector"
+            for(int k=0;k<evento.size();k++){
+                for(int l=0;l<evento.size();l++){
+                if(evento[k]<=evento[l] && l!=k){
+                    menor=true;
+                }
+                else if (l!=k){
+                    menor=false;
+                break;
+                }
+                }
+                if(menor==true){
+                    word=word+evento[k]+" ";
+                    evento.erase(evento.begin()+k);
+                    menor=false;
+                    break;
+                }
+            }
+        } //se completan algunos pasos y se  deja limpio para la sgt interaccion
+        word=word+evento[0];
+        data_hub[i].event=word;
+        evento={""};
+        evento.clear();
+        word="";
     }
-    else{
-         word=word+data_hub[i].event[j];
-    }
- }
- evento.push_back(word);
- word="";
- while(evento.size()>1){    //mientras el vector no sea menor a 1 de tamaño no par "se estan quitando valores al vector"
-    for(int k=0;k<evento.size();k++){
-        for(int l=0;l<evento.size();l++){
-        if(evento[k]<=evento[l] && l!=k){
-            menor=true;
-        }
-        else if (l!=k){
-            menor=false;
-        break;
-        }
-        }
-        if(menor==true){
-            word=word+evento[k]+" ";
-            evento.erase(evento.begin()+k);
-            menor=false;
-            break;
-        }
-    }
-}//se completan algunos pasos y se  deja limpio para la sgt interaccion
-word=word+evento[0];
-data_hub[i].event=word;
-evento={""};
-evento.clear();
-word="";
- }
 }
