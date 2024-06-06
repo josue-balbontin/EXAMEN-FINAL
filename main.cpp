@@ -14,6 +14,7 @@ int main() {
             check_data (data_hub); //como le entrada del comando esta en formato fecha-evento se usa check_data
             delete_identical_events (data_hub); //se elimina el evento si es repetido
             ascending_order (data_hub); //y luego se reoordenada de forma ascentende todo el vector data_hub
+            ascending_order_event (data_hub); //ordeno los eventos
         }
         else if (command == "Del" || command == "DEL" || command == "del") {
             //codigo
