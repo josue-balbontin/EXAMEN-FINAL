@@ -55,7 +55,7 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
     }
 }
 
-void check_data (vector<input> &data_hub){ //funcion para verificar si los datos son correctos
+void check_data (string command, vector<input> &data_hub){ //funcion para verificar si los datos son correctos
         input data; //le doy nombre a mi estructura
         string user_input, copy_user_input, event_input, copy_event_input, date_string;
         char ignore, ignore_again;
@@ -69,7 +69,7 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
         if (!(data_memory>>data.year>>ignore>>data.month>>ignore_again>>data.day) || ignore != '-' || ignore_again != '-') {
             //verifico que el formato de la fecha sea correcto
             cout<<"Wrong date format: "<<date_string<<endl; //debido a que el formato es incorrecto le mando la string que extraje anteriormente
-
+            return;
         }
         
         getline(data_memory, event_input); //si hay un evento tambien lo extraigo como una sola linea
@@ -83,16 +83,25 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
 
         if (data.month<1 || data.month>12){
             cout<<"Month value is invalid: "<<data.month<<endl; //como el dato esta fuera del rango se envia una alerta
-
+            return;
         }
         if (data.day<1 || data.day>31){
             cout<<"Day value is invalid: "<<data.day<<endl; 
-        
+            return;
         }
-        
-        data_hub.push_back(data); //Como todos los datos son correctos, ingreso los datos al vector de estructuras
-        database_out(data_hub);
-
+        //Hasta aqui se garantiza que el formato y la fecha es valida
+        //Dependiendo de cada comando:
+        if ((command == "add" || command == "ADD" || command == "Add") && data.event != ""){
+            data_hub.push_back(data); //Como todos los datos son correctos, ingreso los datos al vector de estructuras
+            database_out(data_hub);
+        }
+        if (command == "del" || command == "DEL" || command == "Del"){
+            int del_year = data.year;
+            int del_month = data.month;
+            int del_day = data.day;
+            string del_event = data.event;
+            del (del_year, del_month, del_day, del_event, data_hub);
+        }
 }
 
 void database_out(const vector<input> &data){//funcion para agregar datos al txt
@@ -172,12 +181,12 @@ void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los 
         while(evento.size()>1){ //mientras el vector no sea menor a 1 de tamaño no par "se estan quitando valores al vector"
             for(int k=0;k<evento.size();k++){
                 for(int l=0;l<evento.size();l++){
-                if(evento[k]<=evento[l] && l!=k){
-                    menor=true;
-                }
+                    if(evento[k]<=evento[l] && l!=k){
+                        menor=true;
+                    }
                 else if (l!=k){
                     menor=false;
-                break;
+                    break;
                 }
                 }
                 if(menor==true){
@@ -196,32 +205,51 @@ void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los 
     }
 }
 
-void print_bd(vector<input> &data_hub){
+void print (vector<input> &data_hub){
     for(int i=0;i<data_hub.size();i++){
         if(data_hub[i].year>=0){
-        for(int j=to_string(data_hub[i].year).size();j<4;j++){
-             cout<<0;
-        }
-        cout<<data_hub[i].year<<"-";
-        if(data_hub[i].month<10){
-            cout<<0;
-        }
-        cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+            for(int j=to_string(data_hub[i].year).size();j<4;j++){
+                cout<<0;
+            }
+            cout<<data_hub[i].year<<"-";
+            if(data_hub[i].month<10){
+                cout<<0;
+            }
+            cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
         }
         if(data_hub[i].year<0){
             cout<<"-";
-        for(int j=to_string(abs(data_hub[i].year)).size();j<4;j++){
-             cout<<0;
-        }
-        cout<<abs(data_hub[i].year)<<"-";
-        if(data_hub[i].month<10){
-            cout<<0;
-        }
-        cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
-        }
-        
-        
+            for(int j=to_string(abs(data_hub[i].year)).size();j<4;j++){
+                cout<<0;
+            }
+            cout<<abs(data_hub[i].year)<<"-";
+            if(data_hub[i].month<10){
+                cout<<0;
+            }
+            cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
         }
     }
+}
 
- 
+void del (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub){ //funcion para eliminar eventos
+    if (del_event != ""){ 
+        for (int i = 0; i<data_hub.size();){
+            if (data_hub[i].year == del_year && data_hub[i].month == del_month && data_hub[i].day == del_day && data_hub[i].event == del_event){
+                data_hub.erase(data_hub.begin() + i);
+            }
+            else{
+                ++i;
+            }
+        }
+    }
+    else{
+        for (int i = 0; i<data_hub.size();){
+            if (data_hub[i].year == del_year && data_hub[i].month == del_month && data_hub[i].day == del_day){
+                data_hub.erase(data_hub.begin() + i);
+            }
+            else{
+                ++i;
+            }
+        }
+    }
+}

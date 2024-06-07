@@ -11,11 +11,10 @@ int main() {
         cin>>command;
         cin.ignore();
         if (command == "Add" || command == "ADD" || command == "add") {
-            check_data (data_hub); //como le entrada del comando esta en formato fecha-evento se usa check_data
+            check_data (command, data_hub);
         }
         else if (command == "Del" || command == "DEL" || command == "del") {
-            //codigo
-            cout<<"mostrando del";
+            check_data (command, data_hub);
         }
         else if (command == "Find" || command == "FIND" || command == "find") {
             //codigo
@@ -26,7 +25,7 @@ int main() {
             ascending_order(data_hub);
             ascending_order_event(data_hub);
             database_out(data_hub);
-            print_bd(data_hub);
+            print(data_hub);
 
         }
         else {
