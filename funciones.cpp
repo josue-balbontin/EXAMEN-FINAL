@@ -56,7 +56,6 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
 }
 
 void check_data (vector<input> &data_hub){ //funcion para verificar si los datos son correctos
-    while (true){
         input data; //le doy nombre a mi estructura
         string user_input, copy_user_input, event_input, copy_event_input, date_string;
         char ignore, ignore_again;
@@ -70,7 +69,7 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
         if (!(data_memory>>data.year>>ignore>>data.month>>ignore_again>>data.day) || ignore != '-' || ignore_again != '-') {
             //verifico que el formato de la fecha sea correcto
             cout<<"Wrong date format: "<<date_string<<endl; //debido a que el formato es incorrecto le mando la string que extraje anteriormente
-            break;
+
         }
         
         getline(data_memory, event_input); //si hay un evento tambien lo extraigo como una sola linea
@@ -84,17 +83,16 @@ void check_data (vector<input> &data_hub){ //funcion para verificar si los datos
 
         if (data.month<1 || data.month>12){
             cout<<"Month value is invalid: "<<data.month<<endl; //como el dato esta fuera del rango se envia una alerta
-            break; //se termina el bucle
+
         }
         if (data.day<1 || data.day>31){
             cout<<"Day value is invalid: "<<data.day<<endl; 
-            break;          
+        
         }
         
         data_hub.push_back(data); //Como todos los datos son correctos, ingreso los datos al vector de estructuras
         database_out(data_hub);
-        break;
-    }
+
 }
 
 void database_out(const vector<input> &data){//funcion para agregar datos al txt
@@ -114,8 +112,13 @@ void delete_identical_events (vector<input> &data_hub){ //elimina un evento si h
     for (int i = 0; i<data_hub.size(); ++i){ //se recorre todos los elementos de data_hub
             for (int j = i+1; j<data_hub.size();){ //j iniciara en un elemento despues de i
                 if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
-                    && data_hub[j].event == data_hub[i].event) {
+                    && data_hub[j].event == data_hub[i].event){
                     //si se encuentra un elemento con exactamente los mismos valores se elimina la copia
+                    data_hub.erase(data_hub.begin() + j);    
+                }
+                else if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
+                    && data_hub[j].event != data_hub[i].event){ //si se encuentra un elemento con la misma fecha pero con diferente evento se suma al evento que se ingreso primero el evento que se ingreso despues
+                    data_hub[i].event = data_hub[i].event + " " + data_hub[j].event;
                     data_hub.erase(data_hub.begin() + j);    
                 }
                 else{
@@ -192,3 +195,33 @@ void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los 
         word="";
     }
 }
+
+void print_bd(vector<input> &data_hub){
+    for(int i=0;i<data_hub.size();i++){
+        if(data_hub[i].year>=0){
+        for(int j=to_string(data_hub[i].year).size();j<4;j++){
+             cout<<0;
+        }
+        cout<<data_hub[i].year<<"-";
+        if(data_hub[i].month<10){
+            cout<<0;
+        }
+        cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+        }
+        if(data_hub[i].year<0){
+            cout<<"-";
+        for(int j=to_string(abs(data_hub[i].year)).size();j<4;j++){
+             cout<<0;
+        }
+        cout<<abs(data_hub[i].year)<<"-";
+        if(data_hub[i].month<10){
+            cout<<0;
+        }
+        cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+        }
+        
+        
+        }
+    }
+
+ 

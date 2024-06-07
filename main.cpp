@@ -12,18 +12,22 @@ int main() {
         cin.ignore();
         if (command == "Add" || command == "ADD" || command == "add") {
             check_data (data_hub); //como le entrada del comando esta en formato fecha-evento se usa check_data
-            delete_identical_events (data_hub); //se elimina el evento si es repetido
-            ascending_order (data_hub); //y luego se reoordenada de forma ascentende todo el vector data_hub
-            ascending_order_event (data_hub); //ordeno los eventos
         }
         else if (command == "Del" || command == "DEL" || command == "del") {
             //codigo
+            cout<<"mostrando del";
         }
         else if (command == "Find" || command == "FIND" || command == "find") {
             //codigo
+            cout<<"mostrando find";
         }
         else if (command == "Print" || command == "PRINT" || command == "print") {
-            //codigo
+            delete_identical_events(data_hub);
+            ascending_order(data_hub);
+            ascending_order_event(data_hub);
+            database_out(data_hub);
+            print_bd(data_hub);
+
         }
         else {
             cout<<"Unknown command: "<<command<<endl;
