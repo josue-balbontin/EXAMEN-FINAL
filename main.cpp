@@ -12,13 +12,14 @@ int main() {
         cin.ignore();
         if (command == "Add" || command == "ADD" || command == "add") {
             check_data (data_hub); //como le entrada del comando esta en formato fecha-evento se usa check_data
+            database_out(data_hub);
         }
         else if (command == "Del" || command == "DEL" || command == "del") {
             //codigo
             cout<<"mostrando del";
         }
         else if (command == "Find" || command == "FIND" || command == "find") {
-            //codigo
+      
             cout<<"mostrando find";
         }
         else if (command == "Print" || command == "PRINT" || command == "print") {

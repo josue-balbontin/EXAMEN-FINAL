@@ -55,46 +55,6 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
     }
 }
 
-void check_data (vector<input> &data_hub){ //funcion para verificar si los datos son correctos
-        input data; //le doy nombre a mi estructura
-        string user_input, copy_user_input, event_input, copy_event_input, date_string;
-        char ignore, ignore_again;
-        getline(cin, user_input); //Se guarda la línea completa después de add como una string llamada user_input
-        copy_user_input = user_input; //copio la string que ingreso el usuario
-        stringstream copy_data_memory (copy_user_input); //creo un area de memoria temporal para extraer solo la fecha independientemente si esta bien o mal
-        copy_data_memory>>date_string; //extraigo solamente la primera string que seria la fecha
-        
-        stringstream data_memory (user_input); //Se crea una área de memoria temporal (como un almacen) que utilizaremos para almacenar los datos antes de usarlos. A diferencia de un string, un stringstream lo podemos usar para extraer los datos almacenados como numeros o chars
-        
-        if (!(data_memory>>data.year>>ignore>>data.month>>ignore_again>>data.day) || ignore != '-' || ignore_again != '-') {
-            //verifico que el formato de la fecha sea correcto
-            cout<<"Wrong date format: "<<date_string<<endl; //debido a que el formato es incorrecto le mando la string que extraje anteriormente
-
-        }
-        
-        getline(data_memory, event_input); //si hay un evento tambien lo extraigo como una sola linea
-        for (int i = 0; i<event_input.size(); ++i){ //creo un bucle para eliminar los espacios
-            if (event_input[i]!=' '){
-                copy_event_input = copy_event_input + event_input[i];                  
-            }
-        }
-        
-        data.event = copy_event_input; //se copia el evento sin espacios en data.event
-
-        if (data.month<1 || data.month>12){
-            cout<<"Month value is invalid: "<<data.month<<endl; //como el dato esta fuera del rango se envia una alerta
-
-        }
-        if (data.day<1 || data.day>31){
-            cout<<"Day value is invalid: "<<data.day<<endl; 
-        
-        }
-        
-        data_hub.push_back(data); //Como todos los datos son correctos, ingreso los datos al vector de estructuras
-        database_out(data_hub);
-
-}
-
 void database_out(const vector<input> &data){//funcion para agregar datos al txt
     remove("database.txt");
     ofstream database; // Se crea un tipo de dato para trabajar con los archivos
@@ -196,25 +156,25 @@ void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los 
     }
 }
 
-void print_bd(vector<input> &data_hub){
-    for(int i=0;i<data_hub.size();i++){
-        if(data_hub[i].year>=0){
+void print_bd(const vector<input> &data_hub){ // funcion para imprimir todo lo que esta en el vector
+    for(int i=0;i<data_hub.size();i++){ // ciclo que recorre todo el vector
+        if(data_hub[i].year>=0){ // si año es mayor a 0
         for(int j=to_string(data_hub[i].year).size();j<4;j++){
              cout<<0;
         }
         cout<<data_hub[i].year<<"-";
-        if(data_hub[i].month<10){
+        if(data_hub[i].month<10){ //si mes es menor a 10
             cout<<0;
         }
         cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
         }
-        if(data_hub[i].year<0){
+        if(data_hub[i].year<0){ //si año es menor a 0
             cout<<"-";
         for(int j=to_string(abs(data_hub[i].year)).size();j<4;j++){
              cout<<0;
         }
         cout<<abs(data_hub[i].year)<<"-";
-        if(data_hub[i].month<10){
+        if(data_hub[i].month<10){ //si mes es menor a 10
             cout<<0;
         }
         cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
@@ -224,4 +184,85 @@ void print_bd(vector<input> &data_hub){
         }
     }
 
- 
+void check_data (vector<input> &data_hub){ // funcion para checkear la informacion y hacer el add
+    input data; //variable para hacer el push
+    string date,event;cin>>date;getline(cin,event); //variable de entrada la fecha "date" y el evento "event"
+    string evento;  //el evento sin espacios
+    string year,month,day,extra="";  //valores para el trabajo
+    unsigned short int guion=0; //contador de guiones
+    bool nega1=false,nega2=false; //saber si hay un negativo
+    bool pass=true; // en caso de que todo este bien 
+    for(int i=0; i<date.size();i++){ //se hace un bucle que recorra toda la strin de date 1-1-1 
+        if(date[i]=='0' || date[i]=='1' || date[i]=='2' || date[i]=='3' || date[i]=='4' || date[i]=='5' || date[i]=='6' || date[i]=='7' || date[i]=='8' || date[i]=='9' || date[i]=='-'){ // verifica si no hay una letra o signo raro
+            if(date[i]=='-' && i!=0){ // en caso de que se halle un guion 
+                 guion++;   //suma un guion y de paso usarlo como punto de control
+                if(date[i+1]=='-'){ //si hay un gion despues de un gion se lo toma como si hubiera un negativo y no se imprime
+                    if(guion==1){ //toma el caso de que si hay un negativo  cuando hay solo un gion por obvias rasones seria el del mes
+                        nega1=true;
+                    }
+                    if(guion==2){   //lo mismo que el anterior pero para dia 
+                        nega2=true;
+                    }
+                    i++; //suma i una vez para que haci no se tome en cuenta el guion del negativo
+                }
+            }
+            if(guion==0){ //si no hay ningun guion por obstante seria  año
+                year=year+date[i];
+            }
+             if(guion==1){ // seria mes
+       
+                month=month+date[i];
+            }
+             if(guion==2){ //seria dia
+                day=day+date[i];
+            }
+            if(guion>2){ //si hay mas guiones entonces eso no esta en ninguno de esos valores o esta mal escrito
+                extra=extra+date[i];
+            }
+            if(extra.size()>0){ //por obstante el formato estaria mal e imprime el error
+                cout<<"Wrong date format:"<<date<<endl;
+                pass=false;
+                break;
+            }
+        }
+        else{ //si se detecta una palabra o caracter no numero ni guion
+            cout<<"Wrong date format:"<<date<<endl;
+            pass=false;
+            break;
+        }
+    }
+
+        if(pass==true){ //en caso de que todo lo anterior este bien hay que verificar si hay negativos y si no se pasa de la fecha
+           if(nega1==true){ //en caso de que se detecte el negativo del mes como true entonces esta mal 
+                cout<<"Month value is invalid: "<< month<<endl;
+           }
+           else if(nega2==true){// lo mismo que el anterior pero para dia 
+            cout<<"Day value is invalid: "<<day<<endl;
+           }
+            else if(abs(stoi(month))>12 || abs(stoi(month))==0 ){ // en caso de que el mes sea mayor a doce o 0 "no puede ser negativo por que ya se comprueba y pro el valor absoulo que se usa pro que se guarda en la variable como -mes-dia por los guiones que separan las fechas"
+                cout<<"Month value is invalid: "<< abs(stoi(month))<<endl;
+            }
+             else if(abs(stoi(day))>31 || abs(stoi(day))==0 ){ //lo mismo que el anterior pero para el caso dia
+                cout<<"Day value is invalid: "<< abs(stoi(day))<<endl;
+            }
+            else{ // en caso de que todo este bien 
+                data.year=stoi(year); //se guarda en la variable imput
+                data.month=abs(stoi(month));
+                data.day=abs(stoi(day));
+               for(int i=0 ;i<event.size();i++){ // funcion para quitar los espacios de event y no producir problemaas
+                    if(event[i]==' '){
+                        continue;
+                    }
+                    else{
+                        evento=evento+event[i];
+                    }
+               }
+               data.event=evento;
+               data_hub.push_back(data);
+            }
+        }
+        else{
+
+        }
+
+}
