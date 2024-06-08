@@ -144,50 +144,42 @@ void delete_identical_events (vector<input> &data_hub){
     }
 }
 
-void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma ascendente
-    //ordenar la fecha
-    vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
-    vector<input> data_hub_orderly; //creo un vector vacio donde agregare los datos ordenados
-    vector<string> events;
-    while(data_hub_copy.size() > 0){ //si la copia de data_hub se queda sin elementos se termina el bucle
-            //de manera arbitraria pongo como minimo momentaneamente el primer valor de cada dato y por lo tanto el indice seria 0
-            int index = 0;
-            for (int i = 1; i < data_hub_copy.size(); ++i){ //el bucle recorrera cada dato de data_hub_copy
-                if (data_hub_copy[i].year < data_hub_copy[index].year || (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month < data_hub_copy[index].month) ||
-                    (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month == data_hub_copy[index].month && data_hub_copy[i].day < data_hub_copy[index].day)) {
-                    // si se encuentra una fecha menor se actualiza el índice
-                    index = i;
-                }
+void ascending_order(vector<input> &data_hub) {
+    // Ordenar por fecha
+    vector<input> data_hub_copy = data_hub; // Copia de data_hub para no alterarla
+    vector<input> data_hub_orderly; // Vector donde se agregarán los datos ordenados
+
+    while (data_hub_copy.size() > 0) {
+        int index = 0;
+        for (int i = 1; i < data_hub_copy.size(); ++i) {
+            if (data_hub_copy[i].year < data_hub_copy[index].year ||
+                (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month < data_hub_copy[index].month) ||
+                (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month == data_hub_copy[index].month && data_hub_copy[i].day < data_hub_copy[index].day)) {
+                index = i;
             }
-            data_hub_orderly.push_back(data_hub_copy[index]); //se agrega la fecha mas antigua de data_hub_copy, al vector data_hub_orderly
-            data_hub_copy.erase(data_hub_copy.begin() + index); //se elimina esa fecha de data_hub_copy para que ya no la tome en cuenta
+        }
+        data_hub_orderly.push_back(data_hub_copy[index]);
+        data_hub_copy.erase(data_hub_copy.begin() + index);
     }
-    data_hub = data_hub_orderly; //data_hub toma los valores de data_hub_orderly
-    //ordenar el evento
-    string long_event;
-    for (int i = 0; i < data_hub.size(); ++i){
-        for (int j = i+1; j < data_hub.size(); ++j){
-            if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
-                    && data_hub[j].event != data_hub[i].event){ //si se encuentra un elemento con la misma fecha pero con diferente evento
-                if ((data_hub[j].event).size() < (data_hub[i].event).size()){ //se compara los tamaños de las string
-                    long_event = data_hub[i].event;
-                    data_hub[i].event = data_hub[j].event;
-                    data_hub[j].event = long_event;
+    data_hub = data_hub_orderly;
+    // Ordenar los eventos alfabéticamente en la misma fecha
+    for (int i = 0; i < data_hub.size(); ++i) {
+        for (int j = i + 1; j < data_hub.size(); ++j) {
+            if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day) {
+                string first_event = data_hub[i].event;
+                string second_event = data_hub[j].event;
+                int k = 0;
+                while (k < first_event.size() && k < second_event.size() && first_event[k] == second_event[k]) {
+                    ++k;
                 }
-                else if ((data_hub[j].event).size() == (data_hub[i].event).size()){ //si los tamaños son iguales se comparar su valor ASCII
-                    string first_event = data_hub[i].event;
-                    string second_event = data_hub[j].event;
-                    for (int k = 0; k < first_event.size(); ++k){
-                        if (tolower(second_event[k]) < tolower(first_event[k])){
-                            long_event = data_hub[i].event;
-                            data_hub[i].event = data_hub[j].event;
-                            data_hub[j].event = long_event;
-                        }
-                    }
+                if (k < first_event.size() && (k == second_event.size() || first_event[k] > second_event[k])) {
+                    string temp_event = data_hub[i].event;
+                    data_hub[i].event = data_hub[j].event;
+                    data_hub[j].event = temp_event;
                 }
             }
         }
-    }    
+    }
 }
 
 void print(vector<input> data_hub) {
