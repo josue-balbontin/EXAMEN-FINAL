@@ -19,7 +19,7 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
             if(texto[i]!='y' && confiry==false){ // copia todo mientras no se detecte una y
                 word=word+texto[i];
             }
-            if(texto[i]=='y' && confiry==false){ //se detecta la y asi que se guarda una condicion bool de y para decir que se detecto y se guarda en data
+            if(texto[i]=='y' && confiry==false){ // se detecta la y asi que se guarda una condicion bool de y para decir que se detecto y se guarda en data
                 confiry=true;
                 data.year=stoi(word);
                 word="";
@@ -53,6 +53,20 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
         confiry=false,confirm=false,confird=false; 
         data_hub.push_back(data);
     }
+    data_hub.erase(data_hub.end());
+}
+
+void database_out(const vector<input> &data){//funcion para agregar datos al txt
+    remove("database.txt");
+    ofstream database; // Se crea un tipo de dato para trabajar con los archivos
+    database.open("database.txt",ios::app); // Se abre el archivo y si no existe se crea
+    if (database.fail()){ // En caso de que no se pueda crear el archivo
+        cout<<"no se pudo abrir el archivo";
+    }
+    for (int i =0;i<data.size();i++){ //se agregan los datos al archivo
+        database<<data[i].year<<"y"<<data[i].month<<"m"<<data[i].day<<"d"<<data[i].event<<endl;
+    }
+
 }
 
 void check_data (string command, vector<input> &data_hub){ //funcion para verificar si los datos son correctos
@@ -102,19 +116,6 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
             string del_event = data.event;
             del (del_year, del_month, del_day, del_event, data_hub);
         }
-}
-
-void database_out(const vector<input> &data){//funcion para agregar datos al txt
-    remove("database.txt");
-    ofstream database; // Se crea un tipo de dato para trabajar con los archivos
-    database.open("database.txt",ios::app); // Se abre el archivo y si no existe se crea
-    if (database.fail()){ // En caso de que no se pueda crear el archivo
-        cout<<"no se pudo abrir el archivo";
-    }
-    for (int i =0;i<data.size();i++){ //se agregan los datos al archivo
-        database<<data[i].year<<"y"<<data[i].month<<"m"<<data[i].day<<"d"<<data[i].event<<endl;
-    }
-
 }
 
 void delete_identical_events (vector<input> &data_hub){ 

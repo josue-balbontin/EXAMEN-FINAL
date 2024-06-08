@@ -12,6 +12,7 @@ int main() {
         cin.ignore();
         if (command == "Add" || command == "ADD" || command == "add") {
             check_data (command, data_hub);
+            database_out(data_hub);
         }
         else if (command == "Del" || command == "DEL" || command == "del") {
             check_data (command, data_hub);
@@ -23,8 +24,8 @@ int main() {
         else if (command == "Print" || command == "PRINT" || command == "print") {
             delete_identical_events(data_hub);
             ascending_order(data_hub);
-            database_out(data_hub);
             print(data_hub);
+            database_out(data_hub);
 
         }
         else {
