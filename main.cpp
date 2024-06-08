@@ -18,8 +18,7 @@ int main() {
             check_data (command, data_hub);
         }
         else if (command == "Find" || command == "FIND" || command == "find") {
-            //codigo
-            cout<<"mostrando find";
+            
         }
         else if (command == "Print" || command == "PRINT" || command == "print") {
             delete_identical_events(data_hub);

@@ -13,9 +13,9 @@ struct input{ //creo las estructuras de los datos que vamos a utilizar
     string event;
 };
 
-void check_data (string command, vector<input> &data_hub);
 void database_out(const vector<input> &data);
 void database_in(vector<input> &data_hub);
+void check_data (string command, vector<input> &data_hub);
 void delete_identical_events (vector<input> &data_hub);
 void ascending_order (vector<input> &data_hub);
 void print (vector<input> data_hub);
