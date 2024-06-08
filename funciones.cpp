@@ -115,8 +115,11 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
             string del_event = data.event;
             del (del_year, del_month, del_day, del_event, data_hub);
         }
-        if (command == "find" && command == "FIND" && command == "Find"){
-            
+        if (command == "find" || command == "FIND" || command == "Find"){
+            int find_year = data.year;
+            int find_month = data.month;
+            int find_day = data.day;
+            find (find_year, find_month, find_day, data_hub);
         }
 }
 
@@ -264,6 +267,14 @@ void del (int del_year, int del_month, int del_day, string del_event, vector <in
             }
         }
         cout<<"Deleted "<<confirmation<<" events"<<endl;
+    }
+}
+
+void find (int find_year, int find_month, int find_day, vector<input> data_hub) {
+    for (int i = 0; i < data_hub.size(); ++i) {
+        if (data_hub[i].year == find_year && data_hub[i].month == find_month && data_hub[i].day == find_day) {
+            cout<<data_hub[i].event<<endl;
+        }
     }
 }
 

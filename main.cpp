@@ -18,14 +18,15 @@ int main() {
             check_data (command, data_hub);
         }
         else if (command == "Find" || command == "FIND" || command == "find") {
-            
+            delete_identical_events(data_hub);
+            ascending_order(data_hub);
+            check_data (command, data_hub);
         }
         else if (command == "Print" || command == "PRINT" || command == "print") {
             delete_identical_events(data_hub);
             ascending_order(data_hub);
             print(data_hub);
             database_out(data_hub);
-
         }
         else {
             cout<<"Unknown command: "<<command<<endl;
