@@ -5,7 +5,6 @@
 int main() {
     vector<input> data_hub; //creo un vector de estructuras que guardara los datos
     database_in(data_hub);
-
     while (true) {
         string command;
         cin>>command;

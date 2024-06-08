@@ -53,6 +53,7 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
         confiry=false,confirm=false,confird=false; 
         data_hub.push_back(data);
     }
+    data_hub.erase(data_hub.end());
 }
 
 void database_out(const vector<input> &data){//funcion para agregar datos al txt
@@ -166,8 +167,13 @@ void print_bd(const vector<input> &data_hub){ // funcion para imprimir todo lo q
         if(data_hub[i].month<10){ //si mes es menor a 10
             cout<<0;
         }
-        cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+        cout<<data_hub[i].month<<"-";
+         if(data_hub[i].day<10){ //si mes es menor a 10
+            cout<<0;
         }
+        cout<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+        }
+
         if(data_hub[i].year<0){ //si año es menor a 0
             cout<<"-";
         for(int j=to_string(abs(data_hub[i].year)).size();j<4;j++){
@@ -177,7 +183,11 @@ void print_bd(const vector<input> &data_hub){ // funcion para imprimir todo lo q
         if(data_hub[i].month<10){ //si mes es menor a 10
             cout<<0;
         }
-        cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+        cout<<data_hub[i].month<<"-";
+         if(data_hub[i].day<10){ //si mes es menor a 10
+            cout<<0;
+        }
+        cout<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
         }
         
         
