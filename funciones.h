@@ -20,3 +20,4 @@ void delete_identical_events (vector<input> &data_hub);
 void ascending_order (vector<input> &data_hub);
 void ascending_order_event (vector<input> &data_hub);
 void print_bd(const vector<input> &data_hub);
+void find_bd(const vector<input> &data_hub );

@@ -276,3 +276,90 @@ void check_data (vector<input> &data_hub){ // funcion para checkear la informaci
         }
 
 }
+
+void find_bd(const vector<input> &data_hub ){
+    string date;cin>>date; //variable de entrada la fecha "date" 
+    string year,month,day,extra="";  //valores para el trabajo
+    unsigned short int guion=0; //contador de guiones
+    bool nega1=false,nega2=false; //saber si hay un negativo
+    bool pass=true; // en caso de que todo este bien 
+    for(int i=0; i<date.size();i++){ //se hace un bucle que recorra toda la strin de date 1-1-1 
+        if(date[i]=='0' || date[i]=='1' || date[i]=='2' || date[i]=='3' || date[i]=='4' || date[i]=='5' || date[i]=='6' || date[i]=='7' || date[i]=='8' || date[i]=='9' || date[i]=='-'){ // verifica si no hay una letra o signo raro
+            if(date[i]=='-' && i!=0){ // en caso de que se halle un guion 
+                 guion++;   //suma un guion y de paso usarlo como punto de control
+                if(date[i+1]=='-'){ //si hay un gion despues de un gion se lo toma como si hubiera un negativo y no se imprime
+                    if(guion==1){ //toma el caso de que si hay un negativo  cuando hay solo un gion por obvias rasones seria el del mes
+                        nega1=true;
+                    }
+                    if(guion==2){   //lo mismo que el anterior pero para dia 
+                        nega2=true;
+                    }
+                    i++; //suma i una vez para que haci no se tome en cuenta el guion del negativo
+                }
+            }
+            if(guion==0){ //si no hay ningun guion por obstante seria  año
+                year=year+date[i];
+            }
+             if(guion==1){ // seria mes
+       
+                month=month+date[i];
+            }
+             if(guion==2){ //seria dia
+                day=day+date[i];
+            }
+            if(guion>2){ //si hay mas guiones entonces eso no esta en ninguno de esos valores o esta mal escrito
+                extra=extra+date[i];
+            }
+            if(extra.size()>0){ //por obstante el formato estaria mal e imprime el error
+                cout<<"Wrong date format:"<<date<<endl;
+                pass=false;
+                break;
+            }
+        }
+        else{ //si se detecta una palabra o caracter no numero ni guion
+            cout<<"Wrong date format:"<<date<<endl;
+            pass=false;
+            break;
+        }
+    }
+
+        if(pass==true){ //en caso de que todo lo anterior este bien hay que verificar si hay negativos y si no se pasa de la fecha
+           if(nega1==true){ //en caso de que se detecte el negativo del mes como true entonces esta mal 
+                cout<<"Month value is invalid: "<< month<<endl;
+           }
+           else if(nega2==true){// lo mismo que el anterior pero para dia 
+            cout<<"Day value is invalid: "<<day<<endl;
+           }
+            else if(abs(stoi(month))>12 || abs(stoi(month))==0 ){ // en caso de que el mes sea mayor a doce o 0 "no puede ser negativo por que ya se comprueba y pro el valor absoulo que se usa pro que se guarda en la variable como -mes-dia por los guiones que separan las fechas"
+                cout<<"Month value is invalid: "<< abs(stoi(month))<<endl;
+            }
+             else if(abs(stoi(day))>31 || abs(stoi(day))==0 ){ //lo mismo que el anterior pero para el caso dia
+                cout<<"Day value is invalid: "<< abs(stoi(day))<<endl;
+            }
+            else{ // en caso de que todo este bien 
+                for(int i =0; i<data_hub.size(); i++){
+                    if(data_hub[i].year==stoi(year) && data_hub[i].month==abs(stoi(month)) && data_hub[i].day==abs(stoi(day))){
+                        for(int j=0; j<data_hub[i].event.size();j++){
+                                if(data_hub[i].event[j]==' '){
+                                    cout<<endl;
+                                }
+                                else{
+                                    cout<<data_hub[i].event[j];
+                                }
+
+                        }
+                        cout<<endl;
+                    }
+                }
+
+
+
+            }
+        }
+        else{
+
+        }
+
+
+}
+

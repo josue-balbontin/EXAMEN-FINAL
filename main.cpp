@@ -5,6 +5,7 @@
 int main() {
     vector<input> data_hub; //creo un vector de estructuras que guardara los datos
     database_in(data_hub);
+    cout<<"INGRESE EL COMANDO Y LA FECHA SI ES NECESARIA"<<endl;
     while (true) {
         string command;
         cin>>command;
@@ -18,8 +19,8 @@ int main() {
             cout<<"mostrando del";
         }
         else if (command == "Find" || command == "FIND" || command == "find") {
-      
-            cout<<"mostrando find";
+            ascending_order_event(data_hub);
+            find_bd(data_hub);
         }
         else if (command == "Print" || command == "PRINT" || command == "print") {
             delete_identical_events(data_hub);
