@@ -19,7 +19,7 @@ void database_in(vector<input> &data_hub){//funcion para exportar los datos del 
             if(texto[i]!='y' && confiry==false){ // copia todo mientras no se detecte una y
                 word=word+texto[i];
             }
-            if(texto[i]=='y' && confiry==false){ // se detecta la y asi que se guarda una condicion bool de y para decir que se detecto y se guarda en data
+            if(texto[i]=='y' && confiry==false){ //se detecta la y asi que se guarda una condicion bool de y para decir que se detecto y se guarda en data
                 confiry=true;
                 data.year=stoi(word);
                 word="";
@@ -184,37 +184,50 @@ void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma 
     }    
 }
 
-void print (vector<input> &data_hub){
-    for (int i = 0; i < data_hub.size(); ++i){
-        if (data_hub[i].year >= 0){
-            for (int j = to_string(data_hub[i].year).size(); j < 4; ++j){
+void print(vector<input> data_hub) {
+    for (int i = 0; i < data_hub.size(); ++i) {
+        if (data_hub[i].year >= 0) {
+            for (int j = to_string(data_hub[i].year).size(); j < 4; ++j) {
                 cout<<"0";
             }
             cout<<data_hub[i].year<<"-";
-            if (data_hub[i].month < 10){
+            if (data_hub[i].month < 10) {
                 cout<<"0";
             }
             cout<<data_hub[i].month<<"-";
-            if (data_hub[i].day < 10){
+            if (data_hub[i].day < 10) {
                 cout<<"0";
             }
-            cout<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
-        }
-        else{
+            cout<<data_hub[i].day<<" ";
+        } else {
             cout<<"-";
-            for (int j = to_string(abs(data_hub[i].year)).size(); j < 4; ++j){
+            for (int j = to_string(abs(data_hub[i].year)).size(); j < 4; ++j) {
                 cout<<"0";
             }
             cout<<abs(data_hub[i].year)<<"-";
-            if (data_hub[i].month < 10){
+            if (data_hub[i].month < 10) {
                 cout<<"0";
             }
             cout<<data_hub[i].month<<"-";
-            if (data_hub[i].day < 10){
+            if (data_hub[i].day < 10) {
                 cout<<"0";
             }
-            cout<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+            cout<<data_hub[i].day<<" ";
         }
+
+        // Imprimir todos los eventos de la misma fecha en una línea
+        string print_event = data_hub[i].event;
+        for (int j = i + 1; j < data_hub.size();) {
+            if (data_hub[j].year == data_hub[i].year &&
+                data_hub[j].month == data_hub[i].month &&
+                data_hub[j].day == data_hub[i].day) {
+                print_event += " " + data_hub[j].event;
+                data_hub.erase(data_hub.begin() + j);
+            } else {
+                ++j;
+            }
+        }
+        cout<<print_event<<endl;
     }
 }
 
