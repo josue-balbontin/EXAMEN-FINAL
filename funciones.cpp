@@ -100,7 +100,7 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
             int del_month = data.month;
             int del_day = data.day;
             string del_event = data.event;
-            del (del_year, del_month, del_day, del_event, data_hub);
+            remove (del_year, del_month, del_day, del_event, data_hub);
         }
 }
 
@@ -206,32 +206,40 @@ void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los 
 }
 
 void print (vector<input> &data_hub){
-    for(int i=0;i<data_hub.size();i++){
-        if(data_hub[i].year>=0){
-            for(int j=to_string(data_hub[i].year).size();j<4;j++){
-                cout<<0;
+    for (int i = 0; i < data_hub.size(); ++i){
+        if (data_hub[i].year >= 0){
+            for (int j = to_string(data_hub[i].year).size(); j < 4; ++j){
+                cout<<"0";
             }
             cout<<data_hub[i].year<<"-";
-            if(data_hub[i].month<10){
-                cout<<0;
+            if (data_hub[i].month < 10){
+                cout<<"0";
             }
-            cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+            cout<<data_hub[i].month<<"-";
+            if (data_hub[i].day < 10){
+                cout<<"0";
+            }
+            cout<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
         }
-        if(data_hub[i].year<0){
+        else{
             cout<<"-";
-            for(int j=to_string(abs(data_hub[i].year)).size();j<4;j++){
-                cout<<0;
+            for (int j = to_string(abs(data_hub[i].year)).size(); j < 4; ++j){
+                cout<<"0";
             }
             cout<<abs(data_hub[i].year)<<"-";
-            if(data_hub[i].month<10){
-                cout<<0;
+            if (data_hub[i].month < 10){
+                cout<<"0";
             }
-            cout<<data_hub[i].month<<"-"<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
+            cout<<data_hub[i].month<<"-";
+            if (data_hub[i].day < 10){
+                cout<<"0";
+            }
+            cout<<data_hub[i].day<<" "<<data_hub[i].event<<endl;
         }
     }
 }
 
-void del (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub){ //funcion para eliminar eventos
+void remove (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub){ //funcion para eliminar eventos
     if (del_event != ""){ 
         for (int i = 0; i<data_hub.size();){
             if (data_hub[i].year == del_year && data_hub[i].month == del_month && data_hub[i].day == del_day && data_hub[i].event == del_event){

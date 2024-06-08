@@ -20,4 +20,4 @@ void delete_identical_events (vector<input> &data_hub);
 void ascending_order (vector<input> &data_hub);
 void ascending_order_event (vector<input> &data_hub);
 void print (vector<input> &data_hub);
-void del (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub);
+void remove (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub);
