@@ -100,7 +100,7 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
             int del_month = data.month;
             int del_day = data.day;
             string del_event = data.event;
-            remove (del_year, del_month, del_day, del_event, data_hub);
+            del (del_year, del_month, del_day, del_event, data_hub);
         }
 }
 
@@ -117,17 +117,12 @@ void database_out(const vector<input> &data){//funcion para agregar datos al txt
 
 }
 
-void delete_identical_events (vector<input> &data_hub){ //elimina un evento si hay otro evento identico
+void delete_identical_events (vector<input> &data_hub){ 
     for (int i = 0; i<data_hub.size(); ++i){ //se recorre todos los elementos de data_hub
             for (int j = i+1; j<data_hub.size();){ //j iniciara en un elemento despues de i
                 if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
                     && data_hub[j].event == data_hub[i].event){
                     //si se encuentra un elemento con exactamente los mismos valores se elimina la copia
-                    data_hub.erase(data_hub.begin() + j);    
-                }
-                else if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
-                    && data_hub[j].event != data_hub[i].event){ //si se encuentra un elemento con la misma fecha pero con diferente evento se suma al evento que se ingreso primero el evento que se ingreso despues
-                    data_hub[i].event = data_hub[i].event + " " + data_hub[j].event;
                     data_hub.erase(data_hub.begin() + j);    
                 }
                 else{
@@ -144,14 +139,16 @@ void delete_identical_events (vector<input> &data_hub){ //elimina un evento si h
 }
 
 void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma ascendente
+    //ordenar la fecha
     vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
     vector<input> data_hub_orderly; //creo un vector vacio donde agregare los datos ordenados
-    while(data_hub_copy.size()>0){ //si la copia de data_hub se queda sin elementos se termina el bucle
+    vector<string> events;
+    while(data_hub_copy.size() > 0){ //si la copia de data_hub se queda sin elementos se termina el bucle
             //de manera arbitraria pongo como minimo momentaneamente el primer valor de cada dato y por lo tanto el indice seria 0
             int index = 0;
-            for (int i = 1; i<data_hub_copy.size(); ++i){ //el bucle recorrera cada dato de data_hub_copy
-                if (data_hub_copy[i].year<data_hub_copy[index].year || (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month<data_hub_copy[index].month) ||
-                    (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month == data_hub_copy[index].month && data_hub_copy[i].day<data_hub_copy[index].day)) {
+            for (int i = 1; i < data_hub_copy.size(); ++i){ //el bucle recorrera cada dato de data_hub_copy
+                if (data_hub_copy[i].year < data_hub_copy[index].year || (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month < data_hub_copy[index].month) ||
+                    (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month == data_hub_copy[index].month && data_hub_copy[i].day < data_hub_copy[index].day)) {
                     // si se encuentra una fecha menor se actualiza el índice
                     index = i;
                 }
@@ -160,49 +157,31 @@ void ascending_order (vector<input> &data_hub){ //funcion para ordenar de forma 
             data_hub_copy.erase(data_hub_copy.begin() + index); //se elimina esa fecha de data_hub_copy para que ya no la tome en cuenta
     }
     data_hub = data_hub_orderly; //data_hub toma los valores de data_hub_orderly
-}
-
-void ascending_order_event (vector<input> &data_hub){//funcion para ordenar los eventos de forma desendiente osea a,b,c,d....
-    string word;
-    bool menor=false;
-    vector<string> evento; //vector para guardar todos los eventos y compararlos
-    for(int i=0 ;i<data_hub.size();i++){ //inicia un bucle para que se ejecute para todos las structuras que hayan
-        for(int j=0;j<data_hub[i].event.size();j++){ // separa las palabras y lo pone en el vector
-            if(data_hub[i].event[j]==' '){
-                evento.push_back(word);
-                word="";
-            }
-            else{
-                word=word+data_hub[i].event[j];
+    //ordenar el evento
+    string long_event;
+    for (int i = 0; i < data_hub.size(); ++i){
+        for (int j = i+1; j < data_hub.size(); ++j){
+            if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
+                    && data_hub[j].event != data_hub[i].event){ //si se encuentra un elemento con la misma fecha pero con diferente evento
+                if ((data_hub[j].event).size() < (data_hub[i].event).size()){ //se compara los tamaños de las string
+                    long_event = data_hub[i].event;
+                    data_hub[i].event = data_hub[j].event;
+                    data_hub[j].event = long_event;
+                }
+                else if ((data_hub[j].event).size() == (data_hub[i].event).size()){ //si los tamaños son iguales se comparar su valor ASCII
+                    string first_event = data_hub[i].event;
+                    string second_event = data_hub[j].event;
+                    for (int k = 0; k < first_event.size(); ++k){
+                        if (tolower(second_event[k]) < tolower(first_event[k])){
+                            long_event = data_hub[i].event;
+                            data_hub[i].event = data_hub[j].event;
+                            data_hub[j].event = long_event;
+                        }
+                    }
+                }
             }
         }
-        evento.push_back(word);
-        word="";
-        while(evento.size()>1){ //mientras el vector no sea menor a 1 de tamaño no par "se estan quitando valores al vector"
-            for(int k=0;k<evento.size();k++){
-                for(int l=0;l<evento.size();l++){
-                    if(evento[k]<=evento[l] && l!=k){
-                        menor=true;
-                    }
-                else if (l!=k){
-                    menor=false;
-                    break;
-                }
-                }
-                if(menor==true){
-                    word=word+evento[k]+" ";
-                    evento.erase(evento.begin()+k);
-                    menor=false;
-                    break;
-                }
-            }
-        } //se completan algunos pasos y se  deja limpio para la sgt interaccion
-        word=word+evento[0];
-        data_hub[i].event=word;
-        evento={""};
-        evento.clear();
-        word="";
-    }
+    }    
 }
 
 void print (vector<input> &data_hub){
@@ -239,7 +218,7 @@ void print (vector<input> &data_hub){
     }
 }
 
-void remove (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub){ //funcion para eliminar eventos
+void del (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub){ //funcion para eliminar eventos
     if (del_event != ""){ 
         for (int i = 0; i<data_hub.size();){
             if (data_hub[i].year == del_year && data_hub[i].month == del_month && data_hub[i].day == del_day && data_hub[i].event == del_event){

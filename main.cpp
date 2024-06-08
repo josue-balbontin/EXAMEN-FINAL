@@ -23,7 +23,6 @@ int main() {
         else if (command == "Print" || command == "PRINT" || command == "print") {
             delete_identical_events(data_hub);
             ascending_order(data_hub);
-            ascending_order_event(data_hub);
             database_out(data_hub);
             print(data_hub);
 
