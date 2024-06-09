@@ -201,7 +201,7 @@ Para empezar MySQL es una base de datos de servicios para transacciones en tiemp
 
 MongoDB. Es una plataforma de construcción de base de datos no relacionales y de código abierto que utiliza documentos flexibles en lugar de tablas y filas para procesas y eliminar varias formas de datos, cual es elástico y es menos restrictivo y con más rendimiento que otros como MySQL además de su flexibilidad y rendimiento para aplicaciones.
 ### Microsoft SQL Server
-![ERROR](https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg)
+![ERROR](https://seeklogo.com/images/M/microsoft-sql-server-logo-96AF49E2B3-seeklogo.com.png)
 
 En si Microsoft SQL Serve no es una base de datos sino es un sistema de administración de bases de datos relacionales. y se conectan con los datos de SQL Server, pero gracias a su manejo de bases de datos puede ser una opción interesante.
 ### Conclusion
