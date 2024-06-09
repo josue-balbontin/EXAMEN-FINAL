@@ -217,5 +217,10 @@ La decisión fue porque permite una rápida conexión con el archivo de fácil a
 Creditos a los autores: 
 * Josue Balbontin 
 * Alejandro Ramirez 
-
-Creado en c++ con el compilador MinGW y el IDE Visual Studio Code
+### Bibliografía
+[¿Qué es una base de datos?](https://www.oracle.com/mx/database/what-is-database/)
+[SQL Server](https://www.mysql.com/)
+[¿Qué es SQL Server? ](https://learn.microsoft.com/es-es/sql/sql-server/what-is-sql-server?view=sql-server-ver16)
+[MongoDB](https://www.mongodb.com/)
+[¿Qué es MongoDB? ](https://www.ibm.com/es-es/topics/mongodb)
+*Creado en c++ con el compilador MinGW y el IDE Visual Studio Code*
