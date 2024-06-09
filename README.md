@@ -203,7 +203,7 @@ MongoDB. Es una plataforma de construcción de base de datos no relacionales y d
 ### Microsoft SQL Server
 ![ERROR](https://seeklogo.com/images/M/microsoft-sql-server-logo-96AF49E2B3-seeklogo.com.png)
 
-En si Microsoft SQL Serve no es una base de datos sino es un sistema de administración de bases de datos relacionales. y se conectan con los datos de SQL Server, pero gracias a su manejo de bases de datos puede ser una opción interesante.
+En si Microsoft SQL Server no es una base de datos sino es un sistema de administración de bases de datos relacionales. y se conectan con los datos de SQL Server, pero gracias a su manejo de bases de datos puede ser una opción interesante.
 ### Conclusion
 Pero la decisión de la base de datos existente e implementada es una base de datos creado en el propio código usando la librería “fstream” que tal como dice (cplusplus.com) es una librería que permite clases de input y output para operar en archivos.
 
