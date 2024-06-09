@@ -209,7 +209,7 @@ Pero la decisión de la base de datos existente e implementada es una base de da
 
 Se basa en la creación de un documento “.txt” que recibe toda la información que ingresa el usuario que este bien y se actualiza con lo que ingresa el usuario para que no haya problema por si lo cierra el programa y que al abrir el programa se carga todo en el programa al iniciar.
 
-La decisión fue porque permite una rápida conexión con el archivo y fácil acceso y lectura y es especial y eficaz para el sistema actual del programa además de que no es necesario aprender ni implementar otro lenguaje de programación como SQL y se puede adaptar todo a través del código con una aceptable sencillez.
+La decisión fue porque permite una rápida conexión con el archivo de fácil acceso y lectura, ademas es especial y eficaz para el sistema actual del programa además de que no es necesario aprender ni implementar otro lenguaje de programación como SQL y se puede adaptar todo a través del código con una aceptable sencillez.
 ## ESTRUCTURA DE REPOSITORIO
 ## FUNCIONES Y ESTRUCTURAS
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO 
