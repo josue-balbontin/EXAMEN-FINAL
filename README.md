@@ -194,12 +194,15 @@ Para empezar una base de datos es según Oracle(2024)“Una recopilación organi
 Así que teniendo en cuenta lo anterior y la necesidad de implementar una base de datos en el programa se buscó las más famosas y oportunas y en la búsqueda las que más nos llamaron la atención fueron: MySQL, MongoDB y Microsoft SQL Server aunque sabemos que hay muchas más.
 ### MySQL
 ![ERROR](https://www.mysql.com/common/logos/logo-mysql-170x115.png)
+
 Para empezar MySQL es una base de datos de servicios para transacciones en tiempo real y análisis que las ventajas que tiene es que es en nube tiene una latencia baja y se puede configurar para OCI, AW y Azure con gran escalabilidad y adaptabilidad con el paso del tiempo-
 ### MongoDB.
 ![ERROR](https://webimages.mongodb.com/_com_assets/cms/kuyjf3vea2hg34taa-horizontal_default_slate_blue.svg?auto=format%252Ccompress)
+
 MongoDB. Es una plataforma de construcción de base de datos no relacionales y de código abierto que utiliza documentos flexibles en lugar de tablas y filas para procesas y eliminar varias formas de datos, cual es elástico y es menos restrictivo y con más rendimiento que otros como MySQL además de su flexibilidad y rendimiento para aplicaciones.
 ### Microsoft SQL Server
-![ERROR](https://www.microsoft.com/en-us/sql-server/blog/wp-content/uploads/2018/03/SQL08_h_rgb_thumb.jpg)
+![ERROR](https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg)
+
 En si Microsoft SQL Serve no es una base de datos sino es un sistema de administración de bases de datos relacionales. y se conectan con los datos de SQL Server, pero gracias a su manejo de bases de datos puede ser una opción interesante.
 ### Conclusion
 Pero la decisión de la base de datos existente e implementada es una base de datos creado en el propio código usando la librería “fstream” que tal como dice (cplusplus.com) es una librería que permite clases de input y output para operar en archivos.
