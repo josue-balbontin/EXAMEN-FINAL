@@ -71,13 +71,37 @@ void database_out (const vector<input> &data){//funcion para agregar datos al tx
 void check_data (string command, vector<input> &data_hub){ //funcion para verificar si los datos son correctos
     input data; //variable para hacer el push
     string date, event;
-    cin>>date;
-    getline(cin,event); //variable de entrada la fecha "date" y el evento "event"
+    string info; 
+    getline(cin,info); //variable de entrada la fecha "date" y el evento "event"
     string event_no_spaces;  //el evento sin espacios
     string year, month, day, extra = "";  //valores para el trabajo
-    unsigned short int script = 0; //contador de scriptes
+    unsigned short int script = 0 ,script_control=0 ; //contador de scriptes
     bool first_negation = false, second_negation = false; //saber si hay un negativo
     bool pass = true; // en caso de que todo este bien 
+    for(int i =0;i<info.size();++i){
+        if(info[i]=='-'){
+            ++script;
+        }
+    }
+    for(int i =0; i<info.size();i++){
+        if(script_control<=script && pass != false){
+            if(info[i]=='-'){
+                ++script_control;
+            }
+            if(script_control==script && info[i]==' '){
+                pass=false;
+            } 
+            if(pass==true){
+             date=date+info[i];
+            }
+        }
+        else{
+        event=event+info[i];
+        }
+    }
+    //se reincian valores usados
+    script=0;
+    pass=true;
     for (int i = 0; i < date.size(); ++i){ //se hace un bucle que recorra toda la strin de date 1-1-1 
         if (date[i] == '0' || date[i] == '1' || date[i] == '2' || date[i] == '3' || date[i] == '4' || date[i] == '5' || date[i] == '6' || date[i] == '7' || date[i] == '8' || date[i] == '9' || date[i] == '-'){ // verifica si no hay una letra o signo raro
             if (date[i] == '-' && i != 0){ // en caso de que se halle un script 
