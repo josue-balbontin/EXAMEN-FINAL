@@ -204,13 +204,26 @@ La decisión fue porque permite una rápida conexión con el archivo de fácil a
 ## ESTRUCTURA DE REPOSITORIO
 ## FUNCIONES Y ESTRUCTURAS
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO
+Funcion que lee la base de datos ".txt" y extrae todos la informacion util por partes para luego agregarla al vector:
+![alt text](image-7.png)
+![alt text](image-8.png)
+Funcion que guarda en el documento de texto los datos ingresados por el usuario:
+![alt text](image-9.png)
+Funcion para eliminar los eventos que son identicos:
 ![alt text](image.png)
+Funcion para ordenar de forma ascendente las fechas y los eventos:
 ![alt text](image-1.png)
+Funcion para mostrar todo el contenido de la base datos:
 ![alt text](image-2.png)
 ![alt text](image-5.png)
-![alt text](image-6.png)
+![alt text](image-10.png)
+Funcion para mostrar los eventos guardados en la fecha indicada:
+![alt text](image-6-1.png)
+Funcion para eliminar un evento agregado anteriormente, o todos los eventos agregados en una fecha indicada:
 ![alt text](image-3.png)
+Funcion que imprime los eventos previamente agregados en la fecha indicada:
 ![alt text](image-4.png)
+
 ## CREDITOS
 Creditos a los autores: 
 * Josue Balbontin 

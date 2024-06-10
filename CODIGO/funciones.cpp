@@ -14,7 +14,7 @@ void database_in (vector<input> &data_hub){//funcion para exportar los datos del
         return ;
     }
     while (!database.eof()){ //mientras no se termine el documento no para
-      getline(database,texto); // obtiene linea por linea del documento
+        getline(database,texto); // obtiene linea por linea del documento
         for (int i = 0; i < texto.size(); ++i){ //mientras no llegue al final de la linea no para
             if (texto[i] != 'y' && confiry == false){ // copia todo mientras no se detecte una y
                 word=word+texto[i];
