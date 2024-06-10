@@ -277,13 +277,30 @@ En la segunda parte en caso de que solo reciba la fecha lo que hace es buscar to
 Lo que hace esta función es buscar todos los vectores relacionados a esa fecha e imprimir su evento con un salto de línea al final.
 
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
+Funcion que lee la base de datos ".txt" y extrae todos la informacion util por partes para luego agregarla al vector:
+![alt text](IMAGENES/image-7.png)
+![alt text](IMAGENES/image-8.png)
+Funcion que guarda en el documento de texto los datos ingresados por el usuario:
+![alt text](IMAGENES/image-9.png)
+Lo que Hace la funcion check_data como se ve en la imagen es comprobar que todo lo ingresado este correcto separarlo y al final segun el comando seguir un flujo a otra funcion.
+![alt text](IMAGENES/check_data1.png)
+![alt text](IMAGENES/check_data2.png)
+![alt text](IMAGENES/check_data3.png)
+Funcion para eliminar los eventos que son identicos:
+![alt text](IMAGENES/image.png)
+Funcion para ordenar de forma ascendente las fechas y los eventos:
+![alt text](IMAGENES/image-1.png)
+Funcion para mostrar todo el contenido de la base datos:
+![alt text](IMAGENES/image-2.png)
+![alt text](IMAGENES/image-5.png)
+![alt text](IMAGENES/image-10.png)
+Funcion para mostrar los eventos guardados en la fecha indicada:
+![alt text](IMAGENES/image-6-1.png)
+Funcion para eliminar un evento agregado anteriormente, o todos los eventos agregados en una fecha indicada:
+![alt text](IMAGENES/image-3.png)
+Funcion que imprime los eventos previamente agregados en la fecha indicada:
+![alt text](IMAGENES/image-4.png)
+
 ## CREDITOS
 Creditos a los autores: 
 * Josue Balbontin 
