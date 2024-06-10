@@ -5,7 +5,7 @@
 int main() {
     vector<input> data_hub; //creo un vector de estructuras que guardara los datos
     database_in(data_hub);
-
+    cout<<"INGRSE EL COMANDO Y LA FECHA CON SU EVENTO SI ES NECESARIO"<<endl;
     while (true) {
         string command;
         cin>>command;

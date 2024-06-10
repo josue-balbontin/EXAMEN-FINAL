@@ -103,7 +103,7 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
     script=0;
     pass=true;
     for (int i = 0; i < date.size(); ++i){ //se hace un bucle que recorra toda la strin de date 1-1-1 
-        if (date[i] == '0' || date[i] == '1' || date[i] == '2' || date[i] == '3' || date[i] == '4' || date[i] == '5' || date[i] == '6' || date[i] == '7' || date[i] == '8' || date[i] == '9' || date[i] == '-'){ // verifica si no hay una letra o signo raro
+        if (date[i] == '0' || date[i] == '1' || date[i] == '2' || date[i] == '3' || date[i] == '4' || date[i] == '5' || date[i] == '6' || date[i] == '7' || date[i] == '8' || date[i] == '9' || date[i] == '-' || date[i]=='+'){ // verifica si no hay una letra o signo raro
             if (date[i] == '-' && i != 0){ // en caso de que se halle un script 
                 ++script;   //suma un script y de paso usarlo como punto de control
                 if (date[i+1] == '-'){ //si hay un gion despues de un gion se lo toma como si hubiera un negativo y no se imprime
@@ -139,6 +139,77 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
             pass = false;
             break;
         }
+    }
+    //se comprueba si hay +
+    unsigned short int mas=0;
+    bool mas_true=false,wrong_format=false;
+    //para year
+    for(int i=0;i<year.size();i++){
+        if(year[i]=='+'){
+            mas++;
+        }
+        if(year[0]=='-' && year[1]=='+' || i==0 && year[i]=='+'){
+            mas_true=true;
+        }
+        if(mas>1){
+             mas_true=false;
+            break;
+        }
+    }
+    if(mas_true==true){
+        if(year[0]=='-'){
+            year.erase(year.begin()+1);
+        }
+        else{
+            year.erase(year.begin());
+        }
+    }
+    if(mas_true==false && mas>0){
+        wrong_format=true;
+    }
+    //para month
+     mas=0;mas_true=false;
+    for(int i=0;i<month.size();i++){
+        if(month[i]=='+'){
+            mas++;
+        }
+        if(month[1]=='+'){
+            mas_true=true;
+        }
+        if(mas>1){
+             mas_true=false;
+            break;
+        }
+    }
+    if(mas_true==true){
+        month.erase(1,1);
+    }
+    if(mas_true==false && mas>0){
+         wrong_format=true;
+    }
+    //para day
+      mas=0;mas_true=false;
+    for(int i=0;i<day.size();i++){
+        if(day[i]=='+'){
+            mas++;
+        }
+        if(day[1]=='+'){
+            mas_true=true;
+        }
+        if(mas>1){
+             mas_true=false;
+            break;
+        }
+    }
+    if(mas_true==true){
+        day.erase(1,1);
+    }
+    if(mas_true==false && mas>0){
+       wrong_format=true;
+    }
+    if(wrong_format==true){
+         cout<<"Wrong date format:"<<date<<endl;
+        pass = false;
     }
     if (pass == true){ //en caso de que todo lo anterior este bien hay que verificar si hay negativos y si no se pasa de la fecha
         if (first_negation == true){ //en caso de que se detecte el negativo del mes como true entonces esta mal 

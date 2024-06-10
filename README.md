@@ -149,7 +149,7 @@ Conversión de un número a una cadena Para, teniendo el número MONTH, formar l
 «El valor del mes no es válido: MONTH», se puede utilizar la función to_string, que convierte
 el número a una cadena. De esta manera, se puede formar la cadena necesaria de la
 siguiente manera:
-> string error = "Month value is invalid: " + to_string(month); language-cpp
+```string error = "Month value is invalid: " + to_string(month); language-cpp```
 #### Búsqueda en un diccionario constante
 Al implementar este patrón, es posible que necesites utilizar la búsqueda con corchetes para
 un diccionario pasado a la función por referencia constante. Como se mostró anteriormente,
@@ -160,34 +160,25 @@ En este caso, en lugar de corchetes, utiliza el método at: en caso de ausencia 
 lanzará una excepción y, por lo tanto, puede ser utilizado para un objeto constante.
 
 Por ejemplo, en lugar del código
-> void DoSomething(const map<int, int>& m) {
-
-> //.
-
-> if (m.count(key) > 0) {
-
-> value = m[key]; / No compilara
-
-> }
-
-> //...
-
-> }
-
+```
+void DoSomething(const map<int, int>& m) {
+// ...
+if (m.count(key) > 0) {
+value = m[key]; // No compilara
+}
+// ...
+}
+```
 Use este codigo:
-> void DoSomething(const map<int, int>& m) {
-
-> //...
-
->    if (m.count(key) > 0) {
-
-> value = m.at(key); / Todo bien
-
-> }
-
-> //...
-
-> }
+```
+void DoSomething(const map<int, int>& m) {
+// ...
+if (m.count(key) > 0) {
+value = m.at(key); / Todo bien
+}
+// ...
+}
+```
 ## BASE DE DATOS 
 Para empezar una base de datos es según Oracle(2024)“Una recopilación organizada de información o datos estructurados, que normalmente se almacena de forma electrónica en un sistema informático”.
 
