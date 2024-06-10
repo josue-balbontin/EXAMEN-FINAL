@@ -135,14 +135,18 @@ Deleted successfully
 Event not found
 ```
 Entrada Incorrecta:
+
 ```Add 0-13-32 event1```
+
 Salida: 
+
 ```Month value is invalid: 13```
 ### Observaciones
 Conversión de un número a una cadena Para, teniendo el número MONTH, formar la cadena
 «El valor del mes no es válido: MONTH», se puede utilizar la función to_string, que convierte
 el número a una cadena. De esta manera, se puede formar la cadena necesaria de la
 siguiente manera:
+
 ```string error = "Month value is invalid: " + to_string(month); language-cpp```
 #### Búsqueda en un diccionario constante
 Al implementar este patrón, es posible que necesites utilizar la búsqueda con corchetes para
