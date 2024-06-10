@@ -21,13 +21,13 @@ almacenarlos todos. No es necesario guardar eventos idénticos que ocurran el mi
 basta con guardar solo uno de ellos.
 
 Nuestra BD debe entender ciertos comandos para que se pueda interactuar con ella:
-
+```
 - agregar evento: Add Fecha Evento
 - eliminar evento: Del Fecha Evento
 - eliminar todos los eventos de una fecha específica: Del Fecha
 - buscar eventos en una fecha específica: Find Fecha
 - imprimir todos los eventos de todas las fechas: Print
-
+```
 Todos los comandos, fechas y eventos en la entrada están separados por espacios. Los
 comandos se leen desde la entrada estándar. En una línea puede haber exactamente un
 comando, pero se pueden ingresar varios comandos en varias líneas. También pueden haber
@@ -88,12 +88,13 @@ Ten en cuenta que:
 Si tanto el mes como el día son incorrectos, se debe mostrar solo un mensaje de error sobre
 el mes.
 #### Ejemplos:
+```
 * 1-1-1 — fecha correcta
 * -1-1-1 — fecha correcta (año -1, mes 1, día 1)
 * 1--1-1 — fecha en formato correcto, pero con un mes incorrecto -1
 * 1---1-1 — fecha en formato incorrecto: el mes no puede comenzar con dos guiones
 * 1-+1-+1 — fecha correcta, ya que +1 es un número entero
-
+```
 Después de manejar cualquiera de los errores de entrada descritos y mostrar el mensaje, el
 programa debe terminar su ejecución.
 #### Qué errores de entrada no manejar
@@ -115,40 +116,37 @@ varios eventos")
 diseñadas de tal manera que no necesitarás imprimirla en el comando Print.
 #### Ejemplos
 Entrada correcta:
-> Add 0-1-2 event1
+```
+Add 0-1-2 event1
+Add 1-2-3 event2
+Find 0-1-2
 
-> Add 1-2-3 event2
-
-> Find 0-1-2
-
-> Del 0-1-2
-
+Del 0-1-2
 Print
-> Del 1-2-3 event2
-
-> Del 1-2-3 event2
-
+Del 1-2-3 event2
+Del 1-2-3 event2
+```
 Salida:
-> event1
-
-> Deleted 1 events
-
-> 0001-02-03 event2
-
-> Deleted successfully
-
-> Event not found
-
+```
+event1
+Deleted 1 events
+0001-02-03 event2
+Deleted successfully
+Event not found
+```
 Entrada Incorrecta:
-> Add 0-13-32 event1
+
+```Add 0-13-32 event1```
 
 Salida: 
-> Month value is invalid: 13
+
+```Month value is invalid: 13```
 ### Observaciones
 Conversión de un número a una cadena Para, teniendo el número MONTH, formar la cadena
 «El valor del mes no es válido: MONTH», se puede utilizar la función to_string, que convierte
 el número a una cadena. De esta manera, se puede formar la cadena necesaria de la
 siguiente manera:
+
 ```string error = "Month value is invalid: " + to_string(month); language-cpp```
 #### Búsqueda en un diccionario constante
 Al implementar este patrón, es posible que necesites utilizar la búsqueda con corchetes para
@@ -202,28 +200,90 @@ Se basa en la creación de un documento “.txt” que recibe toda la informaci�
 
 La decisión fue porque permite una rápida conexión con el archivo de fácil acceso y lectura, ademas es especial y eficaz para el sistema actual del programa además de que no es necesario aprender ni implementar otro lenguaje de programación como SQL y se puede adaptar todo a través del código con una aceptable sencillez.
 ## ESTRUCTURA DE REPOSITORIO
+El repositorio esta ordenado de manera que en la raiz esta el readme
+
+En la carpeta codigo esta todo el codigo para que el funcione el programa.   
+>funciones.cpp
+>funciones.h
+>main.cpp
+
+En la carpeta imagenes estan todas las imagenes que estan en el readme de los pseudocodigos.
+
 ## FUNCIONES Y ESTRUCTURAS
+La estructura del codigo se divide en
+* HEADER "funciones.h" 
+* MAIN "main.cpp"
+* FUNCIONES "funciones.cpp"
+### HEADER
+El header brevemente agregames todas las librerias a usar:
+```
+#include <iostream>
+#include <fstream>
+#include <vector>
+```
+y declaramos una structura que se va a utilizar:
+```
+struct input{ 
+    int month;
+    int day;
+    string event;
+};
+```
+y declaramos las funciones a utilizar:
+```
+void database_out(const vector<input> &data);
+void database_in(vector<input> &data_hub);
+void check_data (string command, vector<input> &data_hub);
+void delete_identical_events (vector<input> &data_hub);
+void ascending_order (vector<input> &data_hub);
+void print (vector<input> data_hub);
+void del (int del_year, int del_month, int del_day, string del_event, vector <input> &data_hub);
+void find (int find_year, int find_month, int find_day, vector<input> data_hub);
+```
+### MAIN
+En main lo que se hace es declarar el vector en el que se van a guardar los datos de entrada: 
+```vector<input> data_hub;```
+,luego se reciben todos los datos del "txt." si es que existen
+```database_in(data_hub)```
+,luego simplemente se crea un while que siempre funcione 
+```while (true)```
+y se le pides la entrada del comando al usuario y depende de eso se trabaja.
+### FUNCIONES
+#### funcion ```database_in```
+Lo que hace esta función es abrir el archivo de la base de datos ".txt" en solo lectura y si no se puede abrir se crea el documento una vez abierto el documento se recibe línea por línea el documento a través de getline y de ahí se lee el documento guardando las variable año, mes , día a través de los controles de flujo y,m,d del documento  y se le hace push al vector y se elimina el ultimo vector que se agregue porque está vacío.
+#### funcion ```database_out```
+Lo que se hace en esta función para que siempre funcione y este ordenado es que en vez de que se ordene el doc. se lo elimina y se crea uno nuevo.
+al hacer esto lo único que se hace es guardar todo en el documento/
+#### funcion ```check_data```
+Lo que se hace en esta función primero es pedirle al usuario que ingrese la fecha y evento XXXX-XX-XX .... y a través de esto para poder trabajar con todos los casos y evitar todos los errores posibles, primero contamos todos los guiones que hay de lo que se recibió del usuario para trabajar en base a esto, gracias a esto podemos identificar en que parte comienza los eventos porque esta va a comenzar después del último guion. Con esto logramos separar evento de fecha.
+
+Una vez separado evento de fecha lo que se hace es trabajar en la fecha primero identificando que ingreso el usuario y si es permitido o no y separar las partes a través de los guiones obteniendo año, mes, día.
+
+Ya obtenido año, mes, día se trabaja para identificar el caso de + para todos los casos posibles identificando si empieza con más cuanto hay y en que posición.
+
+Y una vez acabado de analizar todo ya se puede analizar si los valores son correctos transformándolos a enteros y si esta todo bien borrar todos los espacios del evento y trabajar con estos datos dependiendo del comando que ingreso el usuario en main.
+#### funcion ```delete_identical_events```
+Al todo estar guardado en diferentes índices de los vectores lo que hace esta función es identificar si hay un vector igual que otro en todo aspecto y lo elimina.
+#### funcion ```ascending_order```
+Lo que hace esta función es ordenar todo lo relacionado a las fechas y evento para empezar ordena la fecha a través de un vector copia del original para no afectar al original, y después ordenando por fecha el vector a través de mandar el valor menos a un vector ordenado y eliminando valores al vector copia y una vez echo eso se iguala al vector original.
+
+Luego ve los valores de los vectores y toma el primer valor del vector y lo compara con otro, si hay un vector con la fecha igual cambia los valores de los eventos en función de la comparación de strings.
+#### funcion ```print```
+Lo que hace esta función es recorrer todo el vector para imprimir primero la fecha rellenando con 0ros si faltan y con el negativo si año es negativo, y luego imprime todos los eventos de la misma fecha buscando los vectores iguales e guardando el evento en una variables e eliminándolos del vector "no es paso por referencia" y luego simplemente imprime la variable con todos los eventos de la fecha indicada.
+#### funcion ```del```
+Lo que hace esta función es dividirse en dos partes si el evento está vacío o si no está vacío, primero si no está vacío busca en el vector la fecha indicada que tenga ese evento y lo elimina y suma una variable confirmación que sirve para mostrar cuantos elementos se eliminaron.
+En la segunda parte en caso de que solo reciba la fecha lo que hace es buscar todos los eventos con esa fecha y los elimina y sumando confirmación entre medio.
+#### funcion ```find```
+Lo que hace esta función es buscar todos los vectores relacionados a esa fecha e imprimir su evento con un salto de línea al final.
+
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO
-Funcion que lee la base de datos ".txt" y extrae todos la informacion util por partes para luego agregarla al vector:
-![alt text](image-7.png)
-![alt text](image-8.png)
-Funcion que guarda en el documento de texto los datos ingresados por el usuario:
-![alt text](image-9.png)
-Funcion para eliminar los eventos que son identicos:
 ![alt text](image.png)
-Funcion para ordenar de forma ascendente las fechas y los eventos:
 ![alt text](image-1.png)
-Funcion para mostrar todo el contenido de la base datos:
 ![alt text](image-2.png)
 ![alt text](image-5.png)
-![alt text](image-10.png)
-Funcion para mostrar los eventos guardados en la fecha indicada:
-![alt text](image-6-1.png)
-Funcion para eliminar un evento agregado anteriormente, o todos los eventos agregados en una fecha indicada:
+![alt text](image-6.png)
 ![alt text](image-3.png)
-Funcion que imprime los eventos previamente agregados en la fecha indicada:
 ![alt text](image-4.png)
-
 ## CREDITOS
 Creditos a los autores: 
 * Josue Balbontin 

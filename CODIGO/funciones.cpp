@@ -1,25 +1,32 @@
 #include "funciones.h"
 
 void database_in (vector<input> &data_hub){//funcion para exportar los datos del txt al programa.
-    bool confiry = false, confirm = false, confird = false; //variables para confirmar si ya paso un suceso
-    string word; // variable donde se guarda las palabras de doc 
-    input data; // structura
-    string texto; // texto que se recibe del documento
-    ifstream database; // Se crea un tipo de dato para trabajar con los archivos
-    database.open("database.txt", ios::in); // Se abre el archivo 
-    if (database.fail()){ // En caso de que no se pueda abrir el archivo
+    bool confiry = false, confirm = false, confird = false; 
+    string word; 
+    input data; 
+    string texto; 
+    ifstream database; 
+    database.open("database.txt", ios::in); 
+    if (database.fail()){ 
         cout<<"No se encontro el archivo se va a proceder a crear uno nuevo...";
         database.open("database.txt",ios::app);
         cout<<endl;
         return ;
     }
+<<<<<<< HEAD
     while (!database.eof()){ //mientras no se termine el documento no para
         getline(database,texto); // obtiene linea por linea del documento
         for (int i = 0; i < texto.size(); ++i){ //mientras no llegue al final de la linea no para
             if (texto[i] != 'y' && confiry == false){ // copia todo mientras no se detecte una y
+=======
+    while (!database.eof()){ 
+      getline(database,texto); 
+        for (int i = 0; i < texto.size(); ++i){ 
+            if (texto[i] != 'y' && confiry == false){ 
+>>>>>>> 9da6f88e6a472d74ccde99c683b59338045ad77d
                 word=word+texto[i];
             }
-            if (texto[i] == 'y' && confiry == false){ // se detecta la y asi que se guarda una condicion bool de y para decir que se detecto y se guarda en data
+            if (texto[i] == 'y' && confiry == false){ 
                 confiry = true;
                 data.year = stoi(word);
                 word = "";
@@ -43,7 +50,7 @@ void database_in (vector<input> &data_hub){//funcion para exportar los datos del
                 word = "";
                 continue;
             }
-            if (confird == true && confiry == true && confirm == true){ //si paso por todo lo anterior significa que lo sgt es el event
+            if (confird == true && confiry == true && confirm == true){ 
                 word = word + texto[i];
            }
         }
@@ -58,26 +65,26 @@ void database_in (vector<input> &data_hub){//funcion para exportar los datos del
 
 void database_out (const vector<input> &data){//funcion para agregar datos al txt
     remove("database.txt");
-    ofstream database; // Se crea un tipo de dato para trabajar con los archivos
-    database.open("database.txt", ios::app); // Se abre el archivo y si no existe se crea
-    if (database.fail()){ // En caso de que no se pueda crear el archivo
+    ofstream database; 
+    database.open("database.txt", ios::app); 
+    if (database.fail()){ 
         cout<<"no se pudo abrir el archivo";
     }
-    for (int i = 0; i < data.size(); ++i){ //se agregan los datos al archivo
+    for (int i = 0; i < data.size(); ++i){ 
         database<<data[i].year<<"y"<<data[i].month<<"m"<<data[i].day<<"d"<<data[i].event<<endl;
     }            
 }
 
 void check_data (string command, vector<input> &data_hub){ //funcion para verificar si los datos son correctos
-    input data; //variable para hacer el push
+    input data; 
     string date, event;
     string info; 
-    getline(cin,info); //variable de entrada la fecha "date" y el evento "event"
-    string event_no_spaces;  //el evento sin espacios
-    string year, month, day, extra = "";  //valores para el trabajo
-    unsigned short int script = 0 ,script_control=0 ; //contador de scriptes
-    bool first_negation = false, second_negation = false; //saber si hay un negativo
-    bool pass = true; // en caso de que todo este bien 
+    getline(cin,info); 
+    string event_no_spaces; 
+    string year, month, day, extra = ""; 
+    unsigned short int script = 0 ,script_control=0 ; 
+    bool first_negation = false, second_negation = false; 
+    bool pass = true; 
     for(int i =0;i<info.size();++i){
         if(info[i]=='-'){
             ++script;
@@ -99,42 +106,42 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
         event=event+info[i];
         }
     }
-    //se reincian valores usados
+ 
     script=0;
     pass=true;
-    for (int i = 0; i < date.size(); ++i){ //se hace un bucle que recorra toda la strin de date 1-1-1 
-        if (date[i] == '0' || date[i] == '1' || date[i] == '2' || date[i] == '3' || date[i] == '4' || date[i] == '5' || date[i] == '6' || date[i] == '7' || date[i] == '8' || date[i] == '9' || date[i] == '-' || date[i]=='+'){ // verifica si no hay una letra o signo raro
-            if (date[i] == '-' && i != 0){ // en caso de que se halle un script 
-                ++script;   //suma un script y de paso usarlo como punto de control
-                if (date[i+1] == '-'){ //si hay un gion despues de un gion se lo toma como si hubiera un negativo y no se imprime
-                    if (script == 1){ //toma el caso de que si hay un negativo  cuando hay solo un gion por obvias rasones seria el del mes
+    for (int i = 0; i < date.size(); ++i){ 
+        if (date[i] == '0' || date[i] == '1' || date[i] == '2' || date[i] == '3' || date[i] == '4' || date[i] == '5' || date[i] == '6' || date[i] == '7' || date[i] == '8' || date[i] == '9' || date[i] == '-' || date[i]=='+'){ 
+            if (date[i] == '-' && i != 0){ 
+                ++script;   
+                if (date[i+1] == '-'){ 
+                    if (script == 1){ 
                         first_negation = true;
                     }
-                    if (script == 2){   //lo mismo que el anterior pero para dia 
+                    if (script == 2){   
                         second_negation = true;
                     }
-                    ++i; //suma i una vez para que haci no se tome en cuenta el script del negativo
+                    ++i; 
                 }    
             }
-            if (script == 0){ //si no hay ningun script por obstante seria  año
+            if (script == 0){ 
                 year = year + date[i];
             }
-            if (script == 1){ // seria mes
+            if (script == 1){ 
                 month = month + date[i];
             }
-            if (script == 2){ //seria dia
+            if (script == 2){ 
                 day = day + date[i];
             }
-            if (script > 2){ //si hay mas scriptes entonces eso no esta en ninguno de esos valores o esta mal escrito
+            if (script > 2){ 
                 extra = extra + date[i];
             }
-            if (extra.size() > 0){ //por obstante el formato estaria mal e imprime el error
+            if (extra.size() > 0){ 
                 cout<<"Wrong date format:"<<date<<endl;
                 pass = false;
                 break;
             }
         }
-        else{ //si se detecta una palabra o caracter no numero ni script
+        else{ 
             cout<<"Wrong date format:"<<date<<endl;
             pass = false;
             break;
@@ -143,7 +150,6 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
     //se comprueba si hay +
     unsigned short int mas=0;
     bool mas_true=false,wrong_format=false;
-    //para year
     for(int i=0;i<year.size();i++){
         if(year[i]=='+'){
             mas++;
@@ -158,16 +164,16 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
     }
     if(mas_true==true){
         if(year[0]=='-'){
-            year.erase(year.begin()+1);
+            year.erase(1,1);
         }
         else{
             year.erase(year.begin());
+            
         }
     }
     if(mas_true==false && mas>0){
         wrong_format=true;
     }
-    //para month
      mas=0;mas_true=false;
     for(int i=0;i<month.size();i++){
         if(month[i]=='+'){
@@ -187,7 +193,6 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
     if(mas_true==false && mas>0){
          wrong_format=true;
     }
-    //para day
       mas=0;mas_true=false;
     for(int i=0;i<day.size();i++){
         if(day[i]=='+'){
@@ -212,23 +217,23 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
         pass = false;
     }
     if (pass == true){ //en caso de que todo lo anterior este bien hay que verificar si hay negativos y si no se pasa de la fecha
-        if (first_negation == true){ //en caso de que se detecte el negativo del mes como true entonces esta mal 
+        if (first_negation == true){ 
             cout<<"Month value is invalid: "<< month<<endl;
         }
-        else if (second_negation == true){// lo mismo que el anterior pero para dia 
+        else if (second_negation == true){
             cout<<"Day value is invalid: "<<day<<endl;
         }
-        else if(abs(stoi(month)) > 12 || abs(stoi(month)) == 0 ){ // en caso de que el mes sea mayor a doce o 0 "no puede ser negativo por que ya se comprueba y pro el valor absoulo que se usa pro que se guarda en la variable como -mes-dia por los scriptes que separan las fechas"
+        else if(abs(stoi(month)) > 12 || abs(stoi(month)) == 0 ){ 
             cout<<"Month value is invalid: "<<abs(stoi(month))<<endl;
         }
-        else if(abs(stoi(day)) > 31 || abs(stoi(day)) == 0 ){ //lo mismo que el anterior pero para el caso dia
+        else if(abs(stoi(day)) > 31 || abs(stoi(day)) == 0 ){ 
             cout<<"Day value is invalid: "<<abs(stoi(day))<<endl;
         }
         else{ // en caso de que todo este bien 
-            data.year = stoi(year); //se guarda en la variable imput
+            data.year = stoi(year); 
             data.month = abs(stoi(month));
             data.day = abs(stoi(day));
-            for (int i = 0; i < event.size(); ++i){ // funcion para quitar los espacios de event y no producir problemaas
+            for (int i = 0; i < event.size(); ++i){ 
                 if (event[i] == ' '){
                     continue;
                 }
@@ -238,9 +243,9 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
             }
             data.event = event_no_spaces;
             //Hasta aqui se garantiza que el formato y la fecha es valida
-            //Dependiendo de cada comando:
+
             if ((command == "add" || command == "ADD" || command == "Add") && data.event != ""){
-                data_hub.push_back(data); //Como todos los datos son correctos, ingreso los datos al vector de estructuras
+                data_hub.push_back(data); 
                 database_out(data_hub);
             }
             if (command == "del" || command == "DEL" || command == "Del"){
@@ -254,21 +259,15 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
 }
 
 void delete_identical_events (vector<input> &data_hub){ 
-    for (int i = 0; i<data_hub.size(); ++i){ //se recorre todos los elementos de data_hub
-            for (int j = i+1; j<data_hub.size();){ //j iniciara en un elemento despues de i
+    for (int i = 0; i<data_hub.size(); ++i){ 
+            for (int j = i+1; j<data_hub.size();){ 
                 if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day 
                     && data_hub[j].event == data_hub[i].event){
                     //si se encuentra un elemento con exactamente los mismos valores se elimina la copia
                     data_hub.erase(data_hub.begin() + j);    
                 }
                 else{
-                    ++j; //Si no encuentra una copia ahi recien se incrementa j
-                    //Ejemplo para que se entienda la logica: 
-                    //Obviemos la fecha y digamos que hay un evento a, evento b, copia evento a, evento c, evento d
-                    //i iniciara en evento a y j iniciara en evento b, se compara si evento a y evento b son iguales, como no lo son, j se incrementa
-                    //i sigue en evento a y j ahora esta en copia evento a, como son iguales se elimina copia evento a, y al eliminarse quedaria asi:
-                    //evento a, evento b, evento c, evento d, como habras notado j no cambia porque al eliminarse copia evento a, el evento c se fue para atras y ocupo su numero de indice            }
-                    //si hubiera puesto que j se incrementaba en el for se saltaria al evento d y nunca hubieramos podido comparar el evento c
+                    ++j; 
                 }
             }
     }
@@ -276,24 +275,23 @@ void delete_identical_events (vector<input> &data_hub){
 
 void ascending_order(vector<input> &data_hub) {
     //ordenar la fecha
-    vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
-    vector<input> data_hub_orderly; //creo un vector vacio donde agregare los datos ordenados
-    vector<string> events;
-    while(data_hub_copy.size() > 0){ //si la copia de data_hub se queda sin elementos se termina el bucle
-            //de manera arbitraria pongo como minimo momentaneamente el primer valor de cada dato y por lo tanto el indice seria 0
+    vector<input> data_hub_copy = data_hub; 
+    vector<input> data_hub_orderly; 
+
+    while(data_hub_copy.size() > 0){ 
             int index = 0;
-            for (int i = 1; i < data_hub_copy.size(); ++i){ //el bucle recorrera cada dato de data_hub_copy
+            for (int i = 1; i < data_hub_copy.size(); ++i){ 
                 if (data_hub_copy[i].year < data_hub_copy[index].year || (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month < data_hub_copy[index].month) ||
                     (data_hub_copy[i].year == data_hub_copy[index].year && data_hub_copy[i].month == data_hub_copy[index].month && data_hub_copy[i].day < data_hub_copy[index].day)) {
                     // si se encuentra una fecha menor se actualiza el índice
                     index = i;
                 }
             }
-            data_hub_orderly.push_back(data_hub_copy[index]); //se agrega la fecha mas antigua de data_hub_copy, al vector data_hub_orderly
-            data_hub_copy.erase(data_hub_copy.begin() + index); //se elimina esa fecha de data_hub_copy para que ya no la tome en cuenta
+            data_hub_orderly.push_back(data_hub_copy[index]); 
+            data_hub_copy.erase(data_hub_copy.begin() + index); 
     }
-    data_hub = data_hub_orderly; //data_hub toma los valores de data_hub_orderly
-    // Ordenar el evento alfabéticamente según el valor ASCII
+    data_hub = data_hub_orderly; 
+    // Ordenar el evento alfabéticamente según el valor de comparacion de strings
     for (int i = 0; i < data_hub.size(); ++i) {
         for (int j = i + 1; j < data_hub.size(); ++j) {
             if (data_hub[j].year == data_hub[i].year && data_hub[j].month == data_hub[i].month && data_hub[j].day == data_hub[i].day && data_hub[j].event != data_hub[i].event) {

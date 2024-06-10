@@ -1,11 +1,11 @@
 #include "funciones.h"
 
-//g++ main.cpp funciones.cpp -o database
+
 
 int main() {
-    vector<input> data_hub; //creo un vector de estructuras que guardara los datos
+    vector<input> data_hub; 
     database_in(data_hub);
-    cout<<"INGRSE EL COMANDO Y LA FECHA CON SU EVENTO SI ES NECESARIO"<<endl;
+    cout<<"INGRESE EL COMANDO Y LA FECHA CON SU EVENTO SI ES NECESARIO"<<endl;
     while (true) {
         string command;
         cin>>command;
@@ -15,7 +15,10 @@ int main() {
             database_out(data_hub);
         }
         else if (command == "Del" || command == "DEL" || command == "del") {
+            delete_identical_events(data_hub);
+            ascending_order(data_hub);
             check_data (command, data_hub);
+            database_out(data_hub);
         }
         else if (command == "Find" || command == "FIND" || command == "find") {
             delete_identical_events(data_hub);

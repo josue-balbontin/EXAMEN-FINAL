@@ -1,12 +1,10 @@
 #pragma once
 #include <iostream>
-#include <sstream>
 #include <fstream>
 #include <vector>
-#include <string>
 using namespace std;
 
-struct input{ //creo las estructuras de los datos que vamos a utilizar
+struct input{ 
     int year;
     int month;
     int day;
