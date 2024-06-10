@@ -250,31 +250,32 @@ En main lo que se hace es declarar el vector en el que se van a guardar los dato
 y se le pides la entrada del comando al usuario y depende de eso se trabaja.
 ### FUNCIONES
 #### funcion ```database_in```
-Lo que hace esta funcion es abrir el archivo de la base de datos ".txt" en solo lectura y si no se puede abrir  se crea el documento una vez abierto el documento  se recibe linea por linea el documento a travez de getline y de ahi se lee el documento guardando las variable año , mes , dia a travez de los controles de flujo y,m,d del documento  y se le hace push al vector y se elimina el ultimo vector que se agrege por que esta vacio.
+Lo que hace esta función es abrir el archivo de la base de datos ".txt" en solo lectura y si no se puede abrir se crea el documento una vez abierto el documento se recibe línea por línea el documento a través de getline y de ahí se lee el documento guardando las variable año, mes , día a través de los controles de flujo y,m,d del documento  y se le hace push al vector y se elimina el ultimo vector que se agregue porque está vacío.
 #### funcion ```database_out```
-Lo que se hace en esta funcion para que siempre funcione y este ordenado es que en vez de que se ordene el doc se lo elimina y se crea uno nuevo .
-al hacer esto lo unico que se hace es guardar todo en el documento/
+Lo que se hace en esta función para que siempre funcione y este ordenado es que en vez de que se ordene el doc. se lo elimina y se crea uno nuevo.
+al hacer esto lo único que se hace es guardar todo en el documento/
 #### funcion ```check_data```
-Lo que se hace en esta funcion primero es pedirle al usuario que ingrese la fecha y evento XXXX-XX-XX .... y a travez de esto para poder trabajar con todos los casos y evitar todos los error posibles primero contamos todos los guiones que hay en lo que se recibio del usuario para trabajar en base a esto , gracias a esto podemos identificar en que parte comienza los eventos por que esta va a comenzar despues del ultimo guion .Con esto logramos separar evento de fecha.
+Lo que se hace en esta función primero es pedirle al usuario que ingrese la fecha y evento XXXX-XX-XX .... y a través de esto para poder trabajar con todos los casos y evitar todos los errores posibles, primero contamos todos los guiones que hay de lo que se recibió del usuario para trabajar en base a esto, gracias a esto podemos identificar en que parte comienza los eventos porque esta va a comenzar después del último guion. Con esto logramos separar evento de fecha.
 
-Una vez separado evento de fecha lo que se hace es trabajar en la fecha primero identificando que ingreso el usuario y si es permitido o no y separar las partes a travez de los guiones obteniendo año,mes,dia.
+Una vez separado evento de fecha lo que se hace es trabajar en la fecha primero identificando que ingreso el usuario y si es permitido o no y separar las partes a través de los guiones obteniendo año, mes, día.
 
-Ya obtenido año,mes,dia se trabaja para identificar el caso de + para todos los casos posibles identificando si empieza con mas cuanto hay y en que posicion.
+Ya obtenido año, mes, día se trabaja para identificar el caso de + para todos los casos posibles identificando si empieza con más cuanto hay y en que posición.
 
-Y una vez acabado de analizar todo ya se puede analizar si los valores son correcto transfromandolos a enteros y si esta todo bien borrar todos los espacios del evento y trabajar con estos datos dependiendo del comando que ingreso el usuario en main.
+Y una vez acabado de analizar todo ya se puede analizar si los valores son correctos transformándolos a enteros y si esta todo bien borrar todos los espacios del evento y trabajar con estos datos dependiendo del comando que ingreso el usuario en main.
 #### funcion ```delete_identical_events```
-Al todo estar guardado en diferentes indices de los vectores lo que hace esta funcion es identificar si hay un vector igual que otro en todo aspecto y lo elimina.
+Al todo estar guardado en diferentes índices de los vectores lo que hace esta función es identificar si hay un vector igual que otro en todo aspecto y lo elimina.
 #### funcion ```ascending_order```
-Lo que hace esta funcion es ordenar todo lo relacionado a las fechas y evento para empezar ordena la fecha a travez de un vector copia del original para no afectar al original,  y despues ordenando por fecha el vector a travez de mandar el valor menos a un vector ordenado y eliminando valores al vector copia y una vez echo eso se iguala al vector original.
+Lo que hace esta función es ordenar todo lo relacionado a las fechas y evento para empezar ordena la fecha a través de un vector copia del original para no afectar al original, y después ordenando por fecha el vector a través de mandar el valor menos a un vector ordenado y eliminando valores al vector copia y una vez echo eso se iguala al vector original.
 
-Luego ve los valores de los vectores y  toma el primer valor del vector y lo compara con otro si hay un vector con la fecha igual cambia los valores de los eventos en funcion de la comparacion de strings.
+Luego ve los valores de los vectores y toma el primer valor del vector y lo compara con otro, si hay un vector con la fecha igual cambia los valores de los eventos en función de la comparación de strings.
 #### funcion ```print```
-Lo que hace esta funcion es recorrer todo el vector para imprimir primero la fecha rellenando con 0ros si faltan y con el negativo si año es negativo , y luego imprime todos los eventos de la misma fecha buscando los vectores iguales e guardadando el evento en una variables e eiliminandolos del vector "no es paso por referencia" y luego simplemente imprime la variable con todos los eventos de la fecha indicada.
+Lo que hace esta función es recorrer todo el vector para imprimir primero la fecha rellenando con 0ros si faltan y con el negativo si año es negativo, y luego imprime todos los eventos de la misma fecha buscando los vectores iguales e guardando el evento en una variables e eliminándolos del vector "no es paso por referencia" y luego simplemente imprime la variable con todos los eventos de la fecha indicada.
 #### funcion ```del```
-Lo que hace esta funcion es dividirse en dos partes si el evento esta vacio o si no esta vacio, primero si no esta vacio busca en el vector la fecha indicada que tenga ese evento y lo elimina y suma una variable confirmacion que sirve para mostrar cuantos elementos se eliminaron .
-En la segunda parte en caso de que solo reciba la fecha lo que hace es buscar todos los eventos con esa fecha y los elimina y sumando confirmacion entre medio.
+Lo que hace esta función es dividirse en dos partes si el evento está vacío o si no está vacío, primero si no está vacío busca en el vector la fecha indicada que tenga ese evento y lo elimina y suma una variable confirmación que sirve para mostrar cuantos elementos se eliminaron.
+En la segunda parte en caso de que solo reciba la fecha lo que hace es buscar todos los eventos con esa fecha y los elimina y sumando confirmación entre medio.
 #### funcion ```find```
-Lo que hace esta funcion es buscar todos los vectores relacionados a esa fecha e imprimir su evento con un salto de linea al final.
+Lo que hace esta función es buscar todos los vectores relacionados a esa fecha e imprimir su evento con un salto de línea al final.
+
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO
 ![alt text](IMAGENES/image.png)
 ![alt text](IMAGENES/image-1.png)
