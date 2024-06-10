@@ -1,9 +1,9 @@
 #include "funciones.h"
 
-//g++ main.cpp funciones.cpp -o database
+
 
 int main() {
-    vector<input> data_hub; //creo un vector de estructuras que guardara los datos
+    vector<input> data_hub; 
     database_in(data_hub);
     cout<<"INGRESE EL COMANDO Y LA FECHA CON SU EVENTO SI ES NECESARIO"<<endl;
     while (true) {

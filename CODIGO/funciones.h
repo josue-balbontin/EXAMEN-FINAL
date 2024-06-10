@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-struct input{ //creo las estructuras de los datos que vamos a utilizar
+struct input{ 
     int year;
     int month;
     int day;
