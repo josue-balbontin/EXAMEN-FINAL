@@ -208,6 +208,11 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
          cout<<"Wrong date format:"<<date<<endl;
         pass = false;
     }
+  
+    if(day=="-"){
+         cout<<"Wrong date format:"<<date<<endl;
+        pass = false;
+    }    
     if (pass == true){ //en caso de que todo lo anterior este bien hay que verificar si hay negativos y si no se pasa de la fecha
         if (first_negation == true){ 
             cout<<"Month value is invalid: "<< month<<endl;
