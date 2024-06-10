@@ -243,9 +243,9 @@ void find (int find_year, int find_month, int find_day, vector<input> data_hub);
 ### MAIN
 En main lo que se hace es declarar el vector en el que se van a guardar los datos de entrada: 
 ```vector<input> data_hub;```
-Luego se reciben todos los datos del "txt." si es que existen
+,luego se reciben todos los datos del "txt." si es que existen
 ```database_in(data_hub)```
-Luego simplemente se crea un while que siempre funcione 
+,luego simplemente se crea un while que siempre funcione 
 ```while (true)```
 y se le pides la entrada del comando al usuario y depende de eso se trabaja.
 ### FUNCIONES
