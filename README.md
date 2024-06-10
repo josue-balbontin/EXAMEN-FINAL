@@ -21,13 +21,13 @@ almacenarlos todos. No es necesario guardar eventos idénticos que ocurran el mi
 basta con guardar solo uno de ellos.
 
 Nuestra BD debe entender ciertos comandos para que se pueda interactuar con ella:
-
+```
 - agregar evento: Add Fecha Evento
 - eliminar evento: Del Fecha Evento
 - eliminar todos los eventos de una fecha específica: Del Fecha
 - buscar eventos en una fecha específica: Find Fecha
 - imprimir todos los eventos de todas las fechas: Print
-
+```
 Todos los comandos, fechas y eventos en la entrada están separados por espacios. Los
 comandos se leen desde la entrada estándar. En una línea puede haber exactamente un
 comando, pero se pueden ingresar varios comandos en varias líneas. También pueden haber
@@ -88,12 +88,13 @@ Ten en cuenta que:
 Si tanto el mes como el día son incorrectos, se debe mostrar solo un mensaje de error sobre
 el mes.
 #### Ejemplos:
+```
 * 1-1-1 — fecha correcta
 * -1-1-1 — fecha correcta (año -1, mes 1, día 1)
 * 1--1-1 — fecha en formato correcto, pero con un mes incorrecto -1
 * 1---1-1 — fecha en formato incorrecto: el mes no puede comenzar con dos guiones
 * 1-+1-+1 — fecha correcta, ya que +1 es un número entero
-
+```
 Después de manejar cualquiera de los errores de entrada descritos y mostrar el mensaje, el
 programa debe terminar su ejecución.
 #### Qué errores de entrada no manejar
@@ -115,35 +116,28 @@ varios eventos")
 diseñadas de tal manera que no necesitarás imprimirla en el comando Print.
 #### Ejemplos
 Entrada correcta:
-> Add 0-1-2 event1
+```
+Add 0-1-2 event1
+Add 1-2-3 event2
+Find 0-1-2
 
-> Add 1-2-3 event2
-
-> Find 0-1-2
-
-> Del 0-1-2
-
+Del 0-1-2
 Print
-> Del 1-2-3 event2
-
-> Del 1-2-3 event2
-
+Del 1-2-3 event2
+Del 1-2-3 event2
+```
 Salida:
-> event1
-
-> Deleted 1 events
-
-> 0001-02-03 event2
-
-> Deleted successfully
-
-> Event not found
-
+```
+event1
+Deleted 1 events
+0001-02-03 event2
+Deleted successfully
+Event not found
+```
 Entrada Incorrecta:
-> Add 0-13-32 event1
-
+```Add 0-13-32 event1```
 Salida: 
-> Month value is invalid: 13
+```Month value is invalid: 13```
 ### Observaciones
 Conversión de un número a una cadena Para, teniendo el número MONTH, formar la cadena
 «El valor del mes no es válido: MONTH», se puede utilizar la función to_string, que convierte
