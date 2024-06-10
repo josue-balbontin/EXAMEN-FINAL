@@ -276,13 +276,13 @@ En la segunda parte en caso de que solo reciba la fecha lo que hace es buscar to
 #### funcion ```find```
 Lo que hace esta funcion es buscar todos los vectores relacionados a esa fecha e imprimir su evento con un salto de linea al final.
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO
-![alt text](IMAGENES\image.png)
-![alt text](IMAGENES\image-1.png)
-![alt text](IMAGENES\image-2.png)
-![alt text](IMAGENES\image-5.png)
-![alt text](IMAGENES\image-6.png)
-![alt text](IMAGENES\image-3.png)
-![alt text](IMAGENES\image-4.png)
+![alt text](IMAGENES/image.png)
+![alt text](IMAGENES/image-1.png)
+![alt text](IMAGENES/image-2.png)
+![alt text](IMAGENES/image-5.png)
+![alt text](IMAGENES/image-6.png)
+![alt text](IMAGENES/image-3.png)
+![alt text](IMAGENES/image-4.png)
 ## CREDITOS
 Creditos a los autores: 
 * Josue Balbontin 
