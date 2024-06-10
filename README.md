@@ -203,7 +203,14 @@ Se basa en la creación de un documento “.txt” que recibe toda la informaci�
 La decisión fue porque permite una rápida conexión con el archivo de fácil acceso y lectura, ademas es especial y eficaz para el sistema actual del programa además de que no es necesario aprender ni implementar otro lenguaje de programación como SQL y se puede adaptar todo a través del código con una aceptable sencillez.
 ## ESTRUCTURA DE REPOSITORIO
 ## FUNCIONES Y ESTRUCTURAS
-## DIAGRAMA DE FLUJO O PSEUDOCODIGO 
+## DIAGRAMA DE FLUJO O PSEUDOCODIGO
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
 ## CREDITOS
 Creditos a los autores: 
 * Josue Balbontin 
