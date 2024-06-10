@@ -200,6 +200,18 @@ Se basa en la creación de un documento “.txt” que recibe toda la informaci�
 
 La decisión fue porque permite una rápida conexión con el archivo de fácil acceso y lectura, ademas es especial y eficaz para el sistema actual del programa además de que no es necesario aprender ni implementar otro lenguaje de programación como SQL y se puede adaptar todo a través del código con una aceptable sencillez.
 ## ESTRUCTURA DE REPOSITORIO
+El repositorio esta ordenado de manera que en la raiz esta el readme
+
+En la carpeta codigo esta todo el codigo para que el funcione el programa.
+    
+    funciones.cpp
+
+    funciones.h
+
+    main.cpp
+
+En la carpeta imagenes estan todas las imagenes que estan en el readme de las funciones
+
 ## FUNCIONES Y ESTRUCTURAS
 ## DIAGRAMA DE FLUJO O PSEUDOCODIGO
 ![alt text](image.png)
