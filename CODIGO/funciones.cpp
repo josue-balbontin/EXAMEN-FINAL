@@ -158,16 +158,17 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
     }
     if(mas_true==true){
         if(year[0]=='-'){
-            year.erase(year.begin()+1);
+            year.erase(1,1);
         }
         else{
             year.erase(year.begin());
+            
         }
     }
     if(mas_true==false && mas>0){
         wrong_format=true;
     }
-    //para month
+    //para month 
      mas=0;mas_true=false;
     for(int i=0;i<month.size();i++){
         if(month[i]=='+'){
@@ -278,7 +279,7 @@ void ascending_order(vector<input> &data_hub) {
     //ordenar la fecha
     vector<input> data_hub_copy = data_hub; //creo una copia de data_hub para no alterarla
     vector<input> data_hub_orderly; //creo un vector vacio donde agregare los datos ordenados
-    vector<string> events;
+
     while(data_hub_copy.size() > 0){ //si la copia de data_hub se queda sin elementos se termina el bucle
             //de manera arbitraria pongo como minimo momentaneamente el primer valor de cada dato y por lo tanto el indice seria 0
             int index = 0;
