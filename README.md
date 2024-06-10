@@ -284,6 +284,11 @@ Lo que hace esta función es buscar todos los vectores relacionados a esa fecha 
 ![alt text](IMAGENES/image-6.png)
 ![alt text](IMAGENES/image-3.png)
 ![alt text](IMAGENES/image-4.png)
+![alt text](IMAGENES/check_data1.png)
+![alt text](IMAGENES/check_data2.png)
+![alt text](IMAGENES/check_data3.png)
+
+Lo que Hace la funcion check_data como se ve en la imagen es comprobar que todo lo ingresado este correcto separarlo y al final segun el comando seguir un flujo a otra funcion.
 ## CREDITOS
 Creditos a los autores: 
 * Josue Balbontin 
