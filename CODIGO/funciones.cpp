@@ -209,7 +209,7 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
         pass = false;
     }
   
-    if(day=="-"){
+    if(day=="-" || month=="-" || year=="-"){
          cout<<"Wrong date format:"<<date<<endl;
         pass = false;
     }    
