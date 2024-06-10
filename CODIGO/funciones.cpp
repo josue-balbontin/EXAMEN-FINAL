@@ -99,7 +99,6 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
         event=event+info[i];
         }
     }
- 
     script=0;
     pass=true;
     for (int i = 0; i < date.size(); ++i){ 
@@ -236,7 +235,6 @@ void check_data (string command, vector<input> &data_hub){ //funcion para verifi
             }
             data.event = event_no_spaces;
             //Hasta aqui se garantiza que el formato y la fecha es valida
-
             if ((command == "add" || command == "ADD" || command == "Add") && data.event != ""){
                 data_hub.push_back(data); 
                 database_out(data_hub);
@@ -270,7 +268,6 @@ void ascending_order(vector<input> &data_hub) {
     //ordenar la fecha
     vector<input> data_hub_copy = data_hub; 
     vector<input> data_hub_orderly; 
-
     while(data_hub_copy.size() > 0){ 
             int index = 0;
             for (int i = 1; i < data_hub_copy.size(); ++i){ 
@@ -297,7 +294,6 @@ void ascending_order(vector<input> &data_hub) {
         }
     }
 }
-
 
 void print(vector<input> data_hub) {
     for (int i = 0; i < data_hub.size(); ++i) {
@@ -330,7 +326,6 @@ void print(vector<input> data_hub) {
             }
             cout<<data_hub[i].day<<" ";
         }
-
         // Imprimir todos los eventos de la misma fecha en una línea
         string print_event = data_hub[i].event;
         for (int j = i + 1; j < data_hub.size();) {
